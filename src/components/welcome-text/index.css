@@ -1,0 +1,52 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+:root {
+  --dark-blue: #4f646f;
+  --black: #535657;
+  --purple: #b7adcf;
+  --grey: #dee7e7;
+  --white: #f4faff;
+}
+
+.container-welcome {
+  background-color: var(--dark-blue);
+  color: var(--grey);
+  text-transform: capitalize;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  width: 75%;
+}
+
+.create-container {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.create-container button {
+  background-color: var(--purple);
+  border: none;
+  border-radius: 13px;
+  color: var(--grey);
+  height: 3rem;
+  width: 44%;
+  font-size: 20px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding: 3px;
+}

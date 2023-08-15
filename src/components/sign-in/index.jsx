@@ -8,8 +8,8 @@ function SignIn() {
         <h2 className="title">Scrapbook</h2>
         <div className="signin_box">
           <form>
-            <input type="text" placeholder="Email"></input>
-            <input type="text" placeholder="Password"></input>
+            <input type="email" placeholder="Email"></input>
+            <input type="password" placeholder="Password"></input>
             <button>Sign In</button>
           </form>
         </div>

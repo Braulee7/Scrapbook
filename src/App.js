@@ -1,9 +1,9 @@
-import SignIn from "./components/sign-in/index";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <>
-      <SignIn />
+      <Login />
     </>
   );
 }
