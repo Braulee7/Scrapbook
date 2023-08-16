@@ -2,7 +2,7 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container {
+.container-signin {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -52,7 +52,7 @@ input::placeholder {
   font-size: 20px;
 }
 
-form button {
+.signin-form button {
   background: none;
   border: none;
   width: 70%;
@@ -63,6 +63,10 @@ form button {
   margin-bottom: 1rem;
   text-decoration: none;
   color: #535657;
+}
+
+.signin-form button:hover {
+  cursor: pointer;
 }
 
 .other_providers {
@@ -91,10 +95,34 @@ form button {
   width: 60%;
 }
 
+.google:hover {
+  cursor: pointer;
+}
+
 .google p {
   width: 50%;
   text-align: center;
   color: #535657;
   font-weight: bold;
   text-transform: capitalize;
+}
+
+@media screen and (min-width: 775px) {
+  
+    .signin_box {
+      width: 65%;
+    }
+
+    .container-signin {
+        width: 50vw;
+    }
+
+    .google {
+      width: 45%;
+    }
+
+    .other_providers {
+      width: 60%;
+    }
+
 }

@@ -4,10 +4,10 @@ import "./index.css";
 function SignIn() {
   return (
     <>
-      <div className="container">
+      <div className="container-signin">
         <h2 className="title">Scrapbook</h2>
         <div className="signin_box">
-          <form>
+          <form className="signin-form">
             <input type="email" placeholder="Email"></input>
             <input type="password" placeholder="Password"></input>
             <button>Sign In</button>
