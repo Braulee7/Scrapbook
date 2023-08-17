@@ -2,7 +2,15 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container-signin {
+:root {
+  --dark-blue: #4f646f;
+  --black: #535657;
+  --purple: #b7adcf;
+  --grey: #dee7e7;
+  --white: #f4faff;
+}
+
+.container-login {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -12,47 +20,59 @@
 .title {
   text-transform: uppercase;
   font-weight: bolder;
-  color: #535657;
+  color: var(--black);
 }
 
-.signin_box {
-  background-color: #b7adcf;
+.login_box {
+  background-color: var(--purple);
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   margin: 5vh 0;
   width: 70%;
   height: 50vh;
   min-height: 400px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.signin_box form {
+.login_box form {
   display: flex;
   flex-direction: column;
-  justify-content: baseline;
+  justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  width: 100%;
 }
 
-.signin_box form input {
-  background-color: #dee7e7;
+.login_box form input {
+  background-color: var(--grey);
   border: none;
   padding: 1rem;
   margin: 2rem 0;
   border-radius: 10px;
   width: 80%;
   height: 32px;
-  color: #535657;
+  color: var(--black);
   font-weight: bolder;
   font-size: 20px;
+}
+
+.login_box form input:focus {
+  outline: none;
+  border: solid var(--black) 2px;
 }
 
 input::placeholder {
-  color: #535657;
+  color: var(--black);
   font-weight: bolder;
   font-size: 20px;
 }
 
-.signin-form button {
+.login-form button {
   background: none;
   border: none;
   width: 70%;
@@ -62,10 +82,10 @@ input::placeholder {
   font-size: 25px;
   margin-bottom: 1rem;
   text-decoration: none;
-  color: #535657;
+  color: var(--black);
 }
 
-.signin-form button:hover {
+.login-form button:hover {
   cursor: pointer;
 }
 
@@ -81,7 +101,7 @@ input::placeholder {
   text-transform: uppercase;
   font-weight: 900;
   font-size: 32px;
-  color: #535657;
+  color: var(--black);
 }
 
 .google {
@@ -102,27 +122,25 @@ input::placeholder {
 .google p {
   width: 50%;
   text-align: center;
-  color: #535657;
+  color: var(--black);
   font-weight: bold;
   text-transform: capitalize;
 }
 
 @media screen and (min-width: 775px) {
-  
-    .signin_box {
-      width: 65%;
-    }
+  .login_box {
+    width: 65%;
+  }
 
-    .container-signin {
-        width: 50vw;
-    }
+  .container-login {
+    width: 50vw;
+  }
 
-    .google {
-      width: 45%;
-    }
+  .google {
+    width: 45%;
+  }
 
-    .other_providers {
-      width: 60%;
-    }
-
+  .other_providers {
+    width: 60%;
+  }
 }

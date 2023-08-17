@@ -1,10 +1,15 @@
-.container-login {
-    display: flex;
-    flex-direction: column;
+.container-login-page {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 775px) {
-    .container-login{
-        flex-direction: row;
-    }
+  .container-login-page {
+    flex-direction: row;
+  }
+
+  .container-login-page[data-creating="true"] {
+    flex-direction: row-reverse;
+  }
 }

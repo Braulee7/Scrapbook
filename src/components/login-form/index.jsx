@@ -1,18 +1,12 @@
 import google_logo from "../../assets/svg/google.svg";
 import "./index.css";
 
-function SignIn() {
+function LoginForm({ form }) {
   return (
     <>
-      <div className="container-signin">
+      <div className="container-login">
         <h2 className="title">Scrapbook</h2>
-        <div className="signin_box">
-          <form className="signin-form">
-            <input type="email" placeholder="Email"></input>
-            <input type="password" placeholder="Password"></input>
-            <button>Sign In</button>
-          </form>
-        </div>
+        <div className="login_box">{form}</div>
         <div className="other_providers">
           <h3>Or</h3>
           <button className="google">
@@ -27,4 +21,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default LoginForm;
