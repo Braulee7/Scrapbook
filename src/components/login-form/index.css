@@ -40,55 +40,6 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.login_box form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.login_box form input {
-  background-color: var(--grey);
-  border: none;
-  padding: 1rem;
-  margin: 2rem 0;
-  border-radius: 10px;
-  width: 80%;
-  height: 32px;
-  color: var(--black);
-  font-weight: bolder;
-  font-size: 20px;
-}
-
-.login_box form input:focus {
-  outline: none;
-  border: solid var(--black) 2px;
-}
-
-input::placeholder {
-  color: var(--black);
-  font-weight: bolder;
-  font-size: 20px;
-}
-
-.login-form button {
-  background: none;
-  border: none;
-  width: 70%;
-  text-align: center;
-  overflow: visible;
-  font-weight: bold;
-  font-size: 25px;
-  margin-bottom: 1rem;
-  text-decoration: none;
-  color: var(--black);
-}
-
-.login-form button:hover {
-  cursor: pointer;
-}
-
 .other_providers {
   display: flex;
   flex-direction: row;

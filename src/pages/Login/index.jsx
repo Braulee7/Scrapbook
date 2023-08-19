@@ -2,29 +2,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import LoginForm from "../../components/login-form";
 import Welcome from "../../components/welcome-text";
+import SignIn from "../../components/sign-in";
+import CreateAccount from "../../components/create";
 import "./index.css";
 
 function Login() {
-  const signin = (
-    <>
-      <form className="login-form">
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button>Sign In</button>
-      </form>
-    </>
-  );
-  const create_account = (
-    <>
-      <form className="login-form">
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Confirm Password" />
-        <button>Sign In</button>
-      </form>
-    </>
-  );
-
   const [creating, setCreating] = useState(false);
   const changeState = () => {
     setCreating(!creating);
@@ -37,7 +19,7 @@ function Login() {
           layout
           transition={{ type: "spring", stiffness: 700, damping: 30 }}
         >
-          <LoginForm form={creating ? create_account : signin} />
+          <LoginForm form={creating ? <CreateAccount /> : <SignIn />} />
         </motion.div>
         <motion.div
           layout
