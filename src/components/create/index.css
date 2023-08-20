@@ -8,7 +8,6 @@
 
 .login-form input {
   background-color: var(--grey);
-  border: none;
   padding: 1rem;
   margin: 2rem 0;
   border-radius: 10px;
@@ -17,6 +16,14 @@
   color: var(--black);
   font-weight: bolder;
   font-size: 20px;
+}
+
+.login-form input[data-valid="false"]:focus {
+  border: solid red 3px;
+}
+
+.login-form input[data-matching="false"]:focus {
+  border: solid red 3px;
 }
 
 .login-form input:focus {
