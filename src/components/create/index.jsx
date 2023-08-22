@@ -1,59 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./index.css";
+import ValidationMessage from "../validation";
+
 function CreateAccount() {
+  // focus state
+  const [isFocus, setIsFocus] = useState(false);
+  // email states
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
+  // password states
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
-  const [validLength, setValidLength] = useState(false);
-  const [validLowerCase, setValidLowerCase] = useState(false);
-  const [validUpperCase, setValidUpperCase] = useState(false);
   const [confirmPassword, setConfirmpassword] = useState("");
   const [matching, setMatching] = useState(false);
-
-  const validateEmail = () => {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    setValidEmail(emailPattern.test(email));
-  };
+  const [passwordState, dispatch] = useReducer(reducer, {
+    length: false,
+    lowerCase: false,
+    upperCase: false,
+  });
 
   useEffect(() => {
-    validateEmail();
+    setValidEmail(validateEmail(email));
   }, [email]);
 
-  const checkPasswordLength = () => {
-    setValidLength(password.length > 8);
-  };
-
-  const checkUpperCase = () => {
-    const pattern = /.*[A-Z].*/;
-    setValidUpperCase(pattern.test(password));
-  };
-
-  const checkLowerCase = () => {
-    const pattern = /.*[a-z].*/;
-    setValidLowerCase(pattern.test(password));
-  };
-
-  const validatePassword = () => {
-    checkPasswordLength();
-    checkUpperCase();
-    checkLowerCase();
-    setValidPassword(validLength && validLowerCase && validUpperCase);
-  };
-
-  const checkMatching = () => {
+  useEffect(() => {
+    dispatch({ type: "updateLength", value: password.length > 8 });
+    dispatch({ type: "updateLowerCase", value: /^(?=.*[a-z])/.test(password) });
+    dispatch({ type: "updateUpperCase", value: /^(?=.*[A-Z])/.test(password) });
     setMatching(password === confirmPassword);
-  };
+  }, [password, confirmPassword]);
 
-  const validatePasswords = () => {
-    validatePassword();
-    checkMatching();
-  };
+  useEffect(() => {
+    setValidPassword(
+      passwordState.length && passwordState.lowerCase && passwordState.upperCase
+    );
+  }, [passwordState]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validatePasswords();
-    validateEmail();
+
     if (validPassword && matching && validEmail) {
       // create account
       console.log("Creating account");
@@ -74,6 +59,7 @@ function CreateAccount() {
             setEmail(e.target.value);
           }}
         />
+        {isFocus && <ValidationMessage passwordState={passwordState} />}
         <input
           data-valid={validPassword}
           type="password"
@@ -81,6 +67,12 @@ function CreateAccount() {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
+          }}
+          onFocus={() => {
+            setIsFocus(true);
+          }}
+          onBlur={() => {
+            setIsFocus(false);
           }}
         />
         <input
@@ -96,6 +88,32 @@ function CreateAccount() {
       </form>
     </>
   );
+}
+
+function validateEmail(email) {
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailPattern.test(email);
+}
+
+function reducer(state, action) {
+  let newState;
+  switch (action.type) {
+    case "updateLength":
+      newState = { ...state, length: action.value };
+      break;
+
+    case "updateLowerCase":
+      newState = { ...state, lowerCase: action.value };
+      break;
+
+    case "updateUpperCase":
+      newState = { ...state, upperCase: action.value };
+      break;
+    default:
+      throw new Error("No case found for " + action.type);
+  }
+
+  return newState;
 }
 
 export default CreateAccount;
