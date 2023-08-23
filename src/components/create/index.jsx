@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import CreateWithEmail from "../../util/firebase";
+import { CreateWithEmail } from "../../util/firebase";
 import "./index.css";
 import ValidationMessage from "../validation";
 
@@ -91,7 +91,7 @@ function CreateAccount({ setErrorMessage }) {
             setConfirmpassword(e.target.value);
           }}
         />
-        <button>Sign In</button>
+        <button type="submit">Sign In</button>
       </form>
     </>
   );

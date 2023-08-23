@@ -7,6 +7,13 @@
   padding: 2rem 0;
   margin: none;
 }
+
+.test {
+  position: fixed;
+  width: 100vw;
+  height: 200vh;
+}
+
 .error-container {
   background-color: var(--grey);
   border: 3px solid var(--purple);

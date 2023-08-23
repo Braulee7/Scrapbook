@@ -41,6 +41,7 @@ function ErrorMessage({ message, setMessage }) {
         </button>
         <p className="message">{message}</p>
       </div>
+      <div className="test" onClick={clear}></div>
     </motion.div>
   );
 }

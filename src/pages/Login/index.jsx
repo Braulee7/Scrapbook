@@ -35,7 +35,7 @@ function Login() {
               creating ? (
                 <CreateAccount setErrorMessage={setMessage} />
               ) : (
-                <SignIn />
+                <SignIn setErrorMessage={setMessage} />
               )
             }
           />
