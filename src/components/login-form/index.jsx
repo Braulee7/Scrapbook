@@ -1,7 +1,13 @@
 import google_logo from "../../assets/svg/google.svg";
+import { SignInWithGoogle } from "../../util/firebase";
 import "./index.css";
 
 function LoginForm({ form }) {
+  const handleGoogleClick = (e) => {
+    e.preventDefault();
+    SignInWithGoogle();
+  };
+
   return (
     <>
       <div className="container-login">
@@ -9,7 +15,7 @@ function LoginForm({ form }) {
         <div className="login_box">{form}</div>
         <div className="other_providers">
           <h3>Or</h3>
-          <button className="google">
+          <button className="google" onClick={handleGoogleClick}>
             <span className="logo">
               <img src={google_logo} alt="Google Logo" />
             </span>

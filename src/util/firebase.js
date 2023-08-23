@@ -35,6 +35,11 @@ export async function SignInWithEmail(email, password) {
   }
 }
 
+export function SignInWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
+}
+
 function DescribeError(code) {
   switch (code) {
     case "auth/wrong-password":
