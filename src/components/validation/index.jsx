@@ -7,14 +7,13 @@ function ValidationMessage({ passwordState, isDisabled }) {
     <>
       <motion.div
         transition={{
-          ease: "linear",
-          x: { duration: 0.25 },
           type: "spring",
           stiffness: 250,
           damping: 50,
+          duration: 0.2,
         }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
         className="validation-container"
         disabled={isDisabled}
       >
