@@ -1,8 +1,9 @@
 import { useEffect, useReducer, useState } from "react";
+import CreateWithEmail from "../../util/firebase";
 import "./index.css";
 import ValidationMessage from "../validation";
 
-function CreateAccount() {
+function CreateAccount({ setErrorMessage }) {
   // focus state
   const [isFocus, setIsFocus] = useState(false);
   // email states
@@ -36,12 +37,18 @@ function CreateAccount() {
     );
   }, [passwordState]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validPassword && matching && validEmail) {
       // create account
       console.log("Creating account");
+      try {
+        await CreateWithEmail(email, password);
+      } catch (error) {
+        setErrorMessage(`${error}`);
+        console.log(`setting error message to ${error}`);
+      }
     } else {
       //error in creating
       console.log("Something is wrong");
