@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import cross from "../../assets/svg/cross.svg";
 import "./index.css";
@@ -39,9 +40,11 @@ function ErrorMessage({ message, setMessage }) {
         <button onClick={clear}>
           <img src={cross} alt="close message" />
         </button>
-        <p className="message">{message}</p>
+        <p data-testid="message" className="message">
+          {message}
+        </p>
       </div>
-      <div className="test" onClick={clear}></div>
+      <div data-testid="back-drop" className="back-drop" onClick={clear}></div>
     </motion.div>
   );
 }
