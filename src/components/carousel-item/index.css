@@ -1,0 +1,16 @@
+.carousel-item {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  border: var(--purple) solid 5px;
+
+  margin: 3px;
+}
+
+.active {
+  background-color: var(--purple);
+}
+
+.disabled {
+  background-color: var(--white);
+}

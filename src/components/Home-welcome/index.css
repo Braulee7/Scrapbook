@@ -1,0 +1,12 @@
+.home-welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-welcome-container h1 {
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--black);
+  font-size: 56px;
+}

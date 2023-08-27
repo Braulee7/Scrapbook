@@ -1,0 +1,16 @@
+.card-container {
+  background-color: var(--white);
+  border-radius: 10px;
+  border: var(--purple) solid 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  width: 60vw;
+}
+
+.title {
+  text-align: center;
+}

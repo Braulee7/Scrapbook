@@ -1,0 +1,20 @@
+.memories-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem;
+  height: 45vh;
+}
+
+.memory-list {
+  display: flex;
+  align-self: stretch;
+}
+
+.memory-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

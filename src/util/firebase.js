@@ -1,5 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -16,11 +18,25 @@ firebase.initializeApp({
 });
 
 const auth = firebase.auth();
+const firestore = firebase.firestore();
+
+export function getAuth() {
+  return auth;
+}
+
+export function getUser() {
+  return auth.currentUser;
+}
 
 export async function CreateWithEmail(email, password) {
   try {
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("going home" + user);
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    addUser(userCredentials.user.uid);
   } catch (error) {
     throw DescribeError(error.code);
   }
@@ -53,4 +69,34 @@ function DescribeError(code) {
     default:
       return `Something went wrong: (${code})`;
   }
+}
+
+export function getMemories(uid) {
+  console.log(uid);
+  const ref = firestore.collection("Users").doc(uid).collection("Memories");
+  const query = ref;
+  console.log(query);
+  return query;
+}
+
+export function addUser(uid) {
+  var ref = firestore.collection("Users");
+  console.log("creating user for : " + uid);
+  // check if the user is already in db
+  ref
+    .doc(uid)
+    .get()
+    .then((doc) => {
+      if (!doc.exists) {
+        // add user to db
+        ref.doc(uid).set({
+          uid: uid,
+        });
+      } else {
+        console.log("User already exists");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

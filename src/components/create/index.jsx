@@ -50,8 +50,10 @@ function CreateAccount({ setErrorMessage }) {
         console.log(`setting error message to ${error}`);
       }
     } else {
-      //error in creating
-      console.log("Something is wrong");
+      // get message based on components which are invalid
+      const message = validationMessage(validPassword, matching, validEmail);
+      console.log(message);
+      setErrorMessage(message);
     }
   };
 
@@ -121,6 +123,37 @@ function reducer(state, action) {
   }
 
   return newState;
+}
+
+function validationMessage(validPassword, matching, validEmail) {
+  var messages = [];
+
+  if (!validPassword) {
+    messages.push(
+      <>
+        Password is invalid!
+        <br />
+      </>
+    );
+  }
+
+  if (!matching) {
+    messages.push(
+      <>
+        Passwords are not matching! <br />
+      </>
+    );
+  }
+
+  if (!validEmail) {
+    messages.push(
+      <>
+        Email is not valid! <br />
+      </>
+    );
+  }
+
+  return messages;
 }
 
 export default CreateAccount;

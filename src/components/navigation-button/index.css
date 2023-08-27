@@ -1,0 +1,9 @@
+.navigation {
+  height: 40px;
+  width: 40px;
+  margin: 1rem;
+}
+
+.right {
+  transform: scaleX(-1);
+}
