@@ -28,6 +28,16 @@ export function getUser() {
   return auth.currentUser;
 }
 
+export async function SignOutUser() {
+  try {
+    await firebase.auth().signOut();
+    console.log("Signed out successfully");
+  } catch (error) {
+    console.log(error);
+    throw DescribeError(error.code);
+  }
+}
+
 export async function CreateWithEmail(email, password) {
   try {
     const userCredentials = await createUserWithEmailAndPassword(

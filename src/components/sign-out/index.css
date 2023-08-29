@@ -1,0 +1,24 @@
+#sign-out {
+  background: none;
+  border: none;
+  position: absolute;
+  height: 15%;
+  z-index: 100;
+}
+
+#sign-out:hover {
+  cursor: pointer;
+}
+
+#sign-out img {
+  margin-top: 15px;
+}
+
+#sign-out h1 {
+  background-color: var(--purple);
+  width: 15vw;
+  height: 55%;
+  border-radius: 15px;
+  text-align: center;
+  color: var(--dark-blue);
+}

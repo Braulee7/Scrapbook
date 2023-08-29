@@ -1,0 +1,15 @@
+.home-container {
+  background-color: var(--grey);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.triangle-container::after {
+  position: absolute;
+  content: "";
+  border-top: 20vh solid var(--dark-blue);
+  border-right: 100vw solid transparent;
+  width: 0;
+  transform: scaleY(-1);
+  top: 80vh;
+}

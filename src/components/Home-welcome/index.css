@@ -8,5 +8,6 @@
   text-align: center;
   text-transform: capitalize;
   color: var(--black);
-  font-size: 56px;
+  width: 60%;
+  font-size: 40px;
 }
