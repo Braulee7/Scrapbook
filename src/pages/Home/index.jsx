@@ -9,8 +9,10 @@ function Home() {
     <>
       <div className="home-container">
         <SignOut />
-        <HomeWelcome />
-        <MemoriesComponent uid={user.uid} page={0} />
+        <div className="main-components">
+          <HomeWelcome />
+          <MemoriesComponent uid={user.uid} page={0} />
+        </div>
         <div className="triangle-container"></div>
       </div>
     </>

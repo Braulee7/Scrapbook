@@ -4,6 +4,11 @@
   overflow: hidden;
 }
 
+.main-components {
+  display: flex;
+  flex-direction: column;
+}
+
 .triangle-container::after {
   position: absolute;
   content: "";
@@ -12,4 +17,18 @@
   width: 0;
   transform: scaleY(-1);
   top: 80vh;
+}
+
+@media screen and (min-width: 775px) {
+  .main-components {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 10vw;
+    margin-top: 10vh;
+  }
+
+  .triangle-container::after {
+    border-top: 35vh solid var(--dark-blue);
+    top: 65vh;
+  }
 }

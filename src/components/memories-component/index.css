@@ -10,6 +10,12 @@
 .memory-list {
   display: flex;
   align-self: stretch;
+  justify-content: center;
+  align-items: center;
+}
+
+.memory-list h1 {
+  text-align: center;
 }
 
 .memory-component {

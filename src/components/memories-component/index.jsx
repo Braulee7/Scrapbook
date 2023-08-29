@@ -7,6 +7,7 @@ import NavigationButton from "../navigation-button";
 import CarouselSelector from "../carousell-selector";
 
 import "./index.css";
+import AddMemory from "../add-memory";
 
 function MemoriesComponent({ uid, page }) {
   // get the full list
@@ -65,6 +66,7 @@ function MemoriesComponent({ uid, page }) {
           pageNumber={currPageNumber}
           numberOfPages={numberOfPages}
         />
+        <AddMemory />
       </div>
     </>
   );
