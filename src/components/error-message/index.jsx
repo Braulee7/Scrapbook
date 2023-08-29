@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import cross from "../../assets/svg/cross.svg";
 import "./index.css";
+import Backdrop from "../backdrop";
+
 function ErrorMessage({ message, setMessage }) {
   const clear = (e) => {
     e.stopPropagation();
@@ -44,7 +46,7 @@ function ErrorMessage({ message, setMessage }) {
           {message}
         </p>
       </div>
-      <div data-testid="back-drop" className="back-drop" onClick={clear}></div>
+      <Backdrop callback={clear} />
     </motion.div>
   );
 }

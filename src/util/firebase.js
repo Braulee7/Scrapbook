@@ -33,7 +33,6 @@ export async function SignOutUser() {
     await firebase.auth().signOut();
     console.log("Signed out successfully");
   } catch (error) {
-    console.log(error);
     throw DescribeError(error.code);
   }
 }
@@ -55,15 +54,21 @@ export async function CreateWithEmail(email, password) {
 export async function SignInWithEmail(email, password) {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-    console.log("successfully signed in " + user);
+    addUser(user.user.uid);
   } catch (error) {
     throw DescribeError(error.code);
   }
 }
 
-export function SignInWithGoogle() {
+export async function SignInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
+  try {
+    const result = await auth.signInWithPopup(provider);
+    addUser(result.user.uid);
+  } catch (error) {
+    console.log("got an error");
+    throw DescribeError(error.code);
+  }
 }
 
 function DescribeError(code) {
@@ -76,16 +81,18 @@ function DescribeError(code) {
 
     case "auth/user-not-found":
       return "Email not recognised, please create account or try different Email";
+    case "auth/popup-closed-by-user":
+      return "Accidentally closed the pop up message, please sign in using the pop up!";
+    case "auth/cancelled-popup-request":
+      return "Error processing popup request due to too many calls. Please try again later.";
     default:
       return `Something went wrong: (${code})`;
   }
 }
 
 export function getMemories(uid) {
-  console.log(uid);
   const ref = firestore.collection("Users").doc(uid).collection("Memories");
   const query = ref;
-  console.log(query);
   return query;
 }
 

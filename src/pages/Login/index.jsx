@@ -38,6 +38,7 @@ function Login() {
                 <SignIn setErrorMessage={setMessage} />
               )
             }
+            setErrorMessage={setMessage}
           />
         </motion.div>
         <motion.div

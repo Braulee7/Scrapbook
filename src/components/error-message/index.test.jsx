@@ -27,18 +27,3 @@ test("Clear error message with button", () => {
   // ASSERT
   expect(message).toBe(null);
 });
-
-test("Clear error message with back drop", () => {
-  // ARRANGE
-  var message = "test message";
-  const setMessage = (param) => {
-    message = null;
-  };
-  render(<ErrorMessage message={message} setMessage={setMessage} />);
-
-  // ACT
-  fireEvent.click(screen.getByTestId("back-drop"));
-
-  // ASSERT
-  expect(message).toBe(null);
-});

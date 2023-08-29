@@ -2,10 +2,15 @@ import google_logo from "../../assets/svg/google.svg";
 import { SignInWithGoogle } from "../../util/firebase";
 import "./index.css";
 
-function LoginForm({ form }) {
-  const handleGoogleClick = (e) => {
+function LoginForm({ form, setErrorMessage }) {
+  const handleGoogleClick = async (e) => {
     e.preventDefault();
-    SignInWithGoogle();
+    try {
+      await SignInWithGoogle();
+    } catch (error) {
+      console.log(`error: ${error}`);
+      setErrorMessage(`${error}`);
+    }
   };
 
   return (

@@ -1,0 +1,7 @@
+.back-drop {
+  position: fixed;
+  width: 100vw;
+  height: 200vh;
+  background-color: black;
+  opacity: 0.2;
+}
