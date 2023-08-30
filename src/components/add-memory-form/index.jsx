@@ -1,17 +1,24 @@
 import { useEffect } from "react";
 import { useState } from "react";
-
-function AddMemoryForm() {
+import { addMemory } from "../../util/firebase";
+import "./index.css";
+function AddMemoryForm({ close }) {
   const [name, setName] = useState("");
 
   useEffect(() => {
     setName(name);
   }, [name]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addMemory(name);
+    close();
+  };
   return (
     <>
       <div className="add-memory-container">
         <h1>New Memory</h1>
-        <form className="add-memory">
+        <form onSubmit={handleSubmit} className="add-memory">
           <input
             type="text"
             placeholder="Name"
@@ -19,7 +26,14 @@ function AddMemoryForm() {
               setName(e.target.value);
             }}
           />
-          <button>Create</button>
+          <div className="form-buttons">
+            <button type="submit" className="create">
+              Create
+            </button>
+            <button onClick={close} className="cancel">
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </>

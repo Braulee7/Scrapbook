@@ -1,4 +1,4 @@
-.add-memory {
+.add-memory-button {
   background: none;
   background-color: var(--purple);
   border: none;
@@ -10,13 +10,13 @@
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.add-memory h1 {
+.add-memory-button h1 {
   text-align: center;
   margin: 0;
   width: 100%;
   color: var(--dark-blue);
 }
 
-.add-memory:hover {
+.add-memory-button:hover {
   cursor: pointer;
 }

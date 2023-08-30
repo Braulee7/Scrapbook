@@ -13,8 +13,8 @@
 
 .back-drop {
   position: fixed;
-  height: 100vh;
-  width: 100vw;
+  height: 200vh;
+  width: 200vw;
   background-color: black;
   opacity: 0.2;
   z-index: 0;

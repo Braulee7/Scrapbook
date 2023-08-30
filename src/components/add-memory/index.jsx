@@ -1,11 +1,12 @@
-import "./index.css";
+import AddMemoryForm from "../add-memory-form";
+import Backdrop from "../backdrop";
 
-function AddMemory() {
+function AddMemory({ close }) {
   return (
     <>
-      <button className="add-memory">
-        <h1>Add New Memories</h1>
-      </button>
+      <Backdrop callback={close}>
+        <AddMemoryForm close={close} />
+      </Backdrop>
     </>
   );
 }

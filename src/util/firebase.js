@@ -117,3 +117,15 @@ export function addUser(uid) {
       console.log(error);
     });
 }
+
+export function addMemory(name) {
+  const uid = getUser().uid;
+
+  var ref = firestore.collection("Users").doc(uid).collection("Memories");
+
+  try {
+    ref.add({ Name: name });
+  } catch (error) {
+    console.log(error);
+  }
+}

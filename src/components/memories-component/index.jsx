@@ -7,7 +7,7 @@ import NavigationButton from "../navigation-button";
 import CarouselSelector from "../carousell-selector";
 
 import "./index.css";
-import AddMemory from "../add-memory";
+import AddMemoryButton from "../add-memory-button";
 
 function MemoriesComponent({ uid, page }) {
   // get the full list
@@ -15,20 +15,40 @@ function MemoriesComponent({ uid, page }) {
     idField: "id",
   });
   const [currPageNumber, setCurrPageNumber] = useState(page);
-  const itemsPerPage = 1;
   const [currMemories, setCurrMemories] = useState();
+  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [screenSize, setScreenSize] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (memories) {
-      setCurrMemories(getMemoriesFromPage(memories, currPageNumber, 1));
+      setCurrMemories(
+        getMemoriesFromPage(memories, currPageNumber, itemsPerPage)
+      );
     }
-  }, [currPageNumber, memories]);
+  }, [currPageNumber, memories, itemsPerPage]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        x: window.innerWidth,
+        y: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const items = screenSize.x > 775 ? 4 : 1;
+    setItemsPerPage(items);
+  }, [screenSize]);
 
   if (loading) {
     return <Loading />;
   }
 
-  const numberOfPages = memories.length / itemsPerPage;
+  const numberOfPages = Math.ceil(memories.length / itemsPerPage);
 
   const goNext = (e) => {
     e.preventDefault();
@@ -54,7 +74,7 @@ function MemoriesComponent({ uid, page }) {
           <div className="memory-list">
             {currMemories != null ? (
               currMemories.map((memory) => (
-                <MemoryCard key={memory.idField} title={memory.Name} />
+                <MemoryCard key={memory.Name} title={memory.Name} />
               ))
             ) : (
               <h1 className="no-memories">No memories, click below to add</h1>
@@ -62,11 +82,13 @@ function MemoriesComponent({ uid, page }) {
           </div>
           <NavigationButton orientation={1} handleClick={goNext} />
         </div>
-        <CarouselSelector
-          pageNumber={currPageNumber}
-          numberOfPages={numberOfPages}
-        />
-        <AddMemory />
+        <div className="other-items">
+          <CarouselSelector
+            pageNumber={currPageNumber}
+            numberOfPages={numberOfPages}
+          />
+          <AddMemoryButton />
+        </div>
       </div>
     </>
   );
@@ -80,8 +102,9 @@ function getMemoriesFromPage(memories, page, itemsPerPage) {
 
   let start = page * itemsPerPage;
   let end = start + itemsPerPage;
-
-  return memories.slice(start, end);
+  let newMemories = memories.slice(start, end);
+  console.log(newMemories);
+  return newMemories;
 }
 
 export default MemoriesComponent;

@@ -1,0 +1,80 @@
+.add-memory-container {
+  background-color: var(--purple);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 300px;
+  height: 350px;
+
+  border-radius: 12px;
+  border: 5px solid var(--dark-blue);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.add-memory-container h1 {
+  text-align: center;
+}
+
+.add-memory {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 25%;
+  gap: 2rem;
+}
+
+.add-memory input {
+  background: none;
+  background-color: var(--grey);
+  height: 45px;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.05) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+  color: var(--black);
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.add-memory input:focus {
+  outline: none;
+}
+
+.add-memory input::placeholder {
+  color: var(--black);
+  font-weight: bolder;
+  font-size: 20px;
+}
+.add-memory .form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.form-buttons button {
+  border-radius: 8px;
+  height: 35px;
+  width: 75px;
+  color: var(--dark-blue);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.form-buttons button:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: var(--red);
+}
+
+.create {
+  background-color: var(--green);
+}
