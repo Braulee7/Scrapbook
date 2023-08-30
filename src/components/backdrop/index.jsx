@@ -3,8 +3,9 @@ import "./index.css";
 function Backdrop({ children, callback }) {
   return (
     <>
-      <div className="back-drop" onClick={callback}>
-        {children}
+      <div className="parent">
+        <div className="back-drop" onClick={callback}></div>
+        <div className="children">{children}</div>
       </div>
     </>
   );

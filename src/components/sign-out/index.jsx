@@ -27,13 +27,20 @@ function SignOut() {
       )}
       <motion.button
         layout
+        whileHover={{
+          scale: 1,
+        }}
         onHoverStart={() => setHover(true)}
         onHoverEnd={() => setHover(false)}
-        transition={{ ease: "linear", type: "tween" }}
+        transition={{ ease: "linear", stiffness: 400, damping: 10 }}
         id="sign-out"
         onClick={handleClick}
       >
-        {hover ? <h1>Sign out</h1> : <img src={avi} alt="sign out button" />}
+        {hover ? (
+          <h1 className="sign-out">Sign out</h1>
+        ) : (
+          <img src={avi} alt="sign out button" />
+        )}
       </motion.button>
     </>
   );

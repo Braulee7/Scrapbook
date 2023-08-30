@@ -57,7 +57,7 @@ function MemoriesComponent({ uid, page }) {
                 <MemoryCard key={memory.idField} title={memory.Name} />
               ))
             ) : (
-              <h1>No memories, click below to add</h1>
+              <h1 className="no-memories">No memories, click below to add</h1>
             )}
           </div>
           <NavigationButton orientation={1} handleClick={goNext} />

@@ -1,17 +1,16 @@
 .confirm-container {
-  z-index: 100;
   background-color: var(--purple);
   border-radius: 10px;
   border: 3px solid var(--black);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 90vw;
-
-  position: fixed;
-  top: 30vh;
-  margin: 0 5vw;
+  max-width: 350px;
+  height: 25vh;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .buttons {
@@ -23,4 +22,9 @@
 .buttons button {
   background: none;
   border: none;
+  margin-bottom: 15px;
+}
+
+.buttons button:hover {
+  cursor: pointer;
 }

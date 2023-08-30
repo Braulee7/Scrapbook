@@ -2,23 +2,31 @@
   background: none;
   border: none;
   position: absolute;
-  height: 15%;
-  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
 }
 
 #sign-out:hover {
   cursor: pointer;
+  background-color: var(--purple);
+  border-radius: 15px;
+  border: 2px solid var(--dark-blue);
+  width: 100px;
+  max-width: 100px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #sign-out img {
   margin-top: 15px;
+  border-radius: 50%;
+  border: 2px solid var(--dark-blue);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #sign-out h1 {
-  background-color: var(--purple);
-  width: 15vw;
-  height: 55%;
-  border-radius: 15px;
   text-align: center;
   color: var(--dark-blue);
 }
