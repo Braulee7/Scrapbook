@@ -2,17 +2,26 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { addMemory } from "../../util/firebase";
 import "./index.css";
-function AddMemoryForm({ close }) {
+function AddMemoryForm({ close, setMessage }) {
   const [name, setName] = useState("");
 
   useEffect(() => {
     setName(name);
   }, [name]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addMemory(name);
-    close();
+    // verify name length
+    if (name.length < 3 || name.length > 75) {
+      setMessage("Name must be greater than 3 characters and less than 75!");
+    } else {
+      try {
+        await addMemory(name);
+        close();
+      } catch (error) {
+        setMessage(error);
+      }
+    }
   };
   return (
     <>

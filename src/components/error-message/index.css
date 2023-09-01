@@ -3,9 +3,11 @@
   width: 100vw;
   justify-content: center;
   align-items: center;
-  position: fixed;
   padding: 2rem 0;
   margin: none;
+  position: absolute;
+  right: 2vw;
+  top: 9vh;
 }
 
 .error-container {
@@ -18,7 +20,7 @@
   align-items: center;
   width: 55vw;
   padding: 1rem;
-  z-index: 2;
+  z-index: 15;
 }
 
 .error-container p {
@@ -34,4 +36,12 @@
 
 .error-container button:hover {
   cursor: pointer;
+}
+
+@media screen and (min-width: 725px) {
+  .placeholder {
+    position: absolute;
+    right: 25vw;
+    top: 5vw;
+  }
 }

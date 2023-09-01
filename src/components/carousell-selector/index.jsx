@@ -4,10 +4,10 @@ import "./index.css";
 function CarouselSelector({ numberOfPages, pageNumber }) {
   const pages = new Array(numberOfPages);
   for (let i = 0; i < numberOfPages; i++) {
-    pages[i] = i === pageNumber ? 1 : 0;
+    pages[i] = i;
   }
   const carousel = pages.map((page) => (
-    <CarouselItem active={page === 0 ? false : true} />
+    <CarouselItem key={page} active={page === pageNumber ? false : true} />
   ));
   return (
     <>

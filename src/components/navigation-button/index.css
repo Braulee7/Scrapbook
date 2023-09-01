@@ -4,6 +4,10 @@
   margin: 1rem;
 }
 
+.navigation:hover {
+  cursor: pointer;
+}
+
 .right {
   transform: scaleX(-1);
 }

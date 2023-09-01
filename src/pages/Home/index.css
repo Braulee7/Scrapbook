@@ -2,6 +2,7 @@
   background-color: var(--grey);
   height: 100vh;
   overflow: hidden;
+  z-index: -100;
 }
 
 .main-components {
@@ -17,6 +18,7 @@
   width: 0;
   transform: scaleY(-1);
   top: 80vh;
+  z-index: 0;
 }
 
 @media screen and (min-width: 775px) {

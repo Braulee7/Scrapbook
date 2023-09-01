@@ -17,7 +17,10 @@ function MemoriesComponent({ uid, page }) {
   const [currPageNumber, setCurrPageNumber] = useState(page);
   const [currMemories, setCurrMemories] = useState();
   const [itemsPerPage, setItemsPerPage] = useState(1);
-  const [screenSize, setScreenSize] = useState({ x: 0, y: 0 });
+  const [screenSize, setScreenSize] = useState({
+    x: window.innerWidth,
+    y: window.innerHeight,
+  });
 
   useEffect(() => {
     if (memories) {
@@ -33,14 +36,14 @@ function MemoriesComponent({ uid, page }) {
         x: window.innerWidth,
         y: window.innerHeight,
       });
+      console.log(window.innerHeight);
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  });
 
   useEffect(() => {
-    const items = screenSize.x > 775 ? 4 : 1;
+    const items = screenSize.x > 875 && screenSize.y > 885 ? 4 : 1;
     setItemsPerPage(items);
   }, [screenSize]);
 

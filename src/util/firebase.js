@@ -71,25 +71,6 @@ export async function SignInWithGoogle() {
   }
 }
 
-function DescribeError(code) {
-  switch (code) {
-    case "auth/wrong-password":
-      return "Email and Password Credentials don't match";
-
-    case "auth/email-already-in-use":
-      return "Email already exists, please sign in or create with different Email";
-
-    case "auth/user-not-found":
-      return "Email not recognised, please create account or try different Email";
-    case "auth/popup-closed-by-user":
-      return "Accidentally closed the pop up message, please sign in using the pop up!";
-    case "auth/cancelled-popup-request":
-      return "Error processing popup request due to too many calls. Please try again later.";
-    default:
-      return `Something went wrong: (${code})`;
-  }
-}
-
 export function getMemories(uid) {
   const ref = firestore.collection("Users").doc(uid).collection("Memories");
   const query = ref;
@@ -118,14 +99,47 @@ export function addUser(uid) {
     });
 }
 
-export function addMemory(name) {
+export async function addMemory(name) {
+  // lowercase name to standardize
+  const query = name.toLowerCase();
   const uid = getUser().uid;
+  const memoryExists = `Memory with name "${name}" already exists`;
 
   var ref = firestore.collection("Users").doc(uid).collection("Memories");
 
+  // make sure there is no other doc with the same name
   try {
-    ref.add({ Name: name });
+    const doc = await ref.doc(query).get();
+    console.log(doc);
+    if (doc.exists) {
+      throw memoryExists;
+    }
+  } catch (error) {
+    throw DescribeError(error);
+  }
+
+  try {
+    ref.doc(name).set({ Name: name });
   } catch (error) {
     console.log(error);
+  }
+}
+
+function DescribeError(code) {
+  switch (code) {
+    case "auth/wrong-password":
+      return "Email and Password Credentials don't match";
+
+    case "auth/email-already-in-use":
+      return "Email already exists, please sign in or create with different Email";
+
+    case "auth/user-not-found":
+      return "Email not recognised, please create account or try different Email";
+    case "auth/popup-closed-by-user":
+      return "Accidentally closed the pop up message, please sign in using the pop up!";
+    case "auth/cancelled-popup-request":
+      return "Error processing popup request due to too many calls. Please try again later.";
+    default:
+      return `Something went wrong: (${code})`;
   }
 }
