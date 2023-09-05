@@ -1,0 +1,15 @@
+.description-container {
+  background-color: var(--grey);
+  border: solid 2px var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 260px;
+}
+
+.desc {
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+}

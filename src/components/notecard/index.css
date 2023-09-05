@@ -1,0 +1,22 @@
+.notecard-container {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 158px;
+  height: 210px;
+  border: 2px solid var(--black);
+}
+
+.pink {
+  background-color: var(--pink);
+}
+
+.purple {
+  background-color: var(--purple);
+}
+
+.notecard-container .text {
+  text-align: center;
+  font-weight: bold;
+}

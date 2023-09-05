@@ -1,0 +1,11 @@
+.note-desc-comp {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 2rem;
+  padding: 3rem 0;
+  width: 95vw;
+}

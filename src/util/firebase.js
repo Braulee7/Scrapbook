@@ -31,7 +31,6 @@ export function getUser() {
 export async function SignOutUser() {
   try {
     await firebase.auth().signOut();
-    console.log("Signed out successfully");
   } catch (error) {
     throw DescribeError(error.code);
   }
@@ -66,7 +65,6 @@ export async function SignInWithGoogle() {
     const result = await auth.signInWithPopup(provider);
     addUser(result.user.uid);
   } catch (error) {
-    console.log("got an error");
     throw DescribeError(error.code);
   }
 }
@@ -90,8 +88,6 @@ export function addUser(uid) {
         ref.doc(uid).set({
           uid: uid,
         });
-      } else {
-        console.log("User already exists");
       }
     })
     .catch((error) => {
@@ -110,7 +106,6 @@ export async function addMemory(name) {
   // make sure there is no other doc with the same name
   try {
     const doc = await ref.doc(query).get();
-    console.log(doc);
     if (doc.exists) {
       throw memoryExists;
     }
@@ -123,6 +118,28 @@ export async function addMemory(name) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getDescription(memory, page) {
+  const user = getUser();
+  try {
+    const ref = getMemories(user.uid).doc(memory).collection("Pages").doc(page);
+    const doc = await ref.get();
+    return doc.data().Description;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function getNotecards(memory, page) {
+  const user = getUser();
+  const ref = getMemories(user.uid)
+    .doc(memory)
+    .collection("Pages")
+    .doc(page)
+    .collection("Notes");
+
+  return ref;
 }
 
 function DescribeError(code) {

@@ -135,7 +135,6 @@ function getMemoriesFromPage(memories, page, itemsPerPage) {
   let start = page * itemsPerPage;
   let end = start + itemsPerPage;
   let newMemories = memories.slice(start, end);
-  console.log(newMemories);
   return newMemories;
 }
 

@@ -1,0 +1,29 @@
+.notecard-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.notecard-list-container {
+  background-color: var(--grey);
+  border: ridge 6px var(--pink);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.notecard-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.child {
+  scroll-snap-align: center;
+  height: 100%;
+  width: 100%;
+  margin: 0 50%;
+}
