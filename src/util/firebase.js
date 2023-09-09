@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-
+import "firebase/compat/storage";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -19,6 +19,7 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
+const storage = firebase.storage();
 
 export function getAuth() {
   return auth;
@@ -77,7 +78,6 @@ export function getMemories(uid) {
 
 export function addUser(uid) {
   var ref = firestore.collection("Users");
-  console.log("creating user for : " + uid);
   // check if the user is already in db
   ref
     .doc(uid)
@@ -140,6 +140,66 @@ export function getNotecards(memory, page) {
     .collection("Notes");
 
   return ref;
+}
+
+export async function getImages(memory, page) {
+  const user = getUser();
+  // go to user folder
+  const userRef = storage.ref().child(user.uid);
+  // image folder
+  const imageFolder = userRef.child(`${memory}/${page}`);
+
+  try {
+    const imagesRes = await imageFolder.listAll();
+    var images = [];
+    const numberOfImages = imagesRes.items.length;
+    for (let i = 0; i < numberOfImages; i++) {
+      let url = await getUrlFromImageRef(imagesRes.items[i]);
+      images.push(url);
+    }
+    return images;
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
+export async function getUrlFromImageRef(ref) {
+  try {
+    const url = await ref.getDownloadURL();
+    return url;
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
+export async function uploadImageToCloud(memory, page, file, setPercent) {
+  const user = getUser();
+  // go to user folder
+  const userRef = storage.ref().child(user.uid);
+  const fileName = file.name.split(" ").join("_");
+  // image folder
+  const image = userRef.child(`${memory}/${page}/${fileName}`);
+
+  try {
+    const uploadTask = image.put(file);
+    // wait for file to upload
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        //get percent of change
+        setPercent(snapshot.bytesTransferred / snapshot.totalBytes);
+      },
+      (error) => {
+        throw DescribeError(error);
+      },
+      () => {
+        // successful upload return reference
+        return "success";
+      }
+    );
+  } catch (error) {
+    throw DescribeError(error);
+  }
 }
 
 function DescribeError(code) {

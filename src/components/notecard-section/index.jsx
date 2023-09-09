@@ -4,8 +4,8 @@ function NoteCardSection({ notecards }) {
   return (
     <>
       <div className="notecard-list">
-        {notecards.map((notecard) => (
-          <Notecard key={notecard.idField} text={notecard.text} />
+        {notecards.map((notecard, index) => (
+          <Notecard key={index} text={notecard.text} />
         ))}
       </div>
     </>

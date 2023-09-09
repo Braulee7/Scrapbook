@@ -7,7 +7,7 @@ import Memory from "./pages/Memory";
 
 function App() {
   const [user] = useAuthState(getAuth());
-  return <Memory />;
+  return <>{user ? <Memory /> : <Login />}</>;
   return <>{user ? <Home /> : <Login />}</>;
 }
 

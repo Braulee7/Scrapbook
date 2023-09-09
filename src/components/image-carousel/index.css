@@ -1,0 +1,4 @@
+.image-carousel {
+  display: flex;
+  overflow: scroll;
+}
