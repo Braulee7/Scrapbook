@@ -1,9 +1,9 @@
 import "./index.css";
 
-function Image({ url }) {
+function Image({ url, className }) {
   return (
     <>
-      <div className="image-container">
+      <div className={`single-image-container ${className}`}>
         <img className="firebase-image" src={url} alt="firebase" />
       </div>
     </>

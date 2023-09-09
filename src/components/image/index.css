@@ -1,9 +1,16 @@
 .firebase-image {
-  max-width: 247px;
-  max-height: 247px;
+  max-width: 207px;
+  max-height: 207px;
   width: auto;
   height: auto;
 
   border: 3px solid var(--pink);
   border-radius: 10px;
+}
+
+@media screen and (min-width: 717px) {
+  .firebase-image {
+    max-width: 247px;
+    max-height: 247px;
+  }
 }

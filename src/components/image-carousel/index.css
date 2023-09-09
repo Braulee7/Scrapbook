@@ -1,4 +1,10 @@
 .image-carousel {
+  background-color: var(--purple);
+  width: 456px;
+
   display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  align-items: center;
   overflow: scroll;
 }

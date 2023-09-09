@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { uploadImageToCloud } from "../../util/firebase";
 
-function UploadFile({ memory, page }) {
+function UploadFile({ memory, page, load, setMessage, clear }) {
   const [files, setFiles] = useState();
-  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     setFiles(files);
@@ -16,12 +15,20 @@ function UploadFile({ memory, page }) {
     }
   };
 
-  const upload = (e) => {
+  const upload = async (e) => {
     if (files) {
       // upload all files
       for (let i = 0; i < files.length; i++) {
-        uploadImageToCloud(memory, page, files[i], setPercent);
+        const file = files[i];
+        if (vaildateFile(file)) {
+          await uploadImageToCloud(memory, page, files[i], load);
+        } else {
+          setMessage(
+            "Error: Only the following file formats are accepted: {.jpg : .png : .jpeg }"
+          );
+        }
       }
+      clear();
     }
   };
 
@@ -38,6 +45,12 @@ function UploadFile({ memory, page }) {
       </div>
     </>
   );
+}
+
+function vaildateFile(file) {
+  const allowedExtensions = /(jpg|jpeg|png)/i;
+  const extension = file.name.split(".").pop();
+  return allowedExtensions.test(extension);
 }
 
 export default UploadFile;

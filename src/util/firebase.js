@@ -172,7 +172,7 @@ export async function getUrlFromImageRef(ref) {
   }
 }
 
-export async function uploadImageToCloud(memory, page, file, setPercent) {
+export async function uploadImageToCloud(memory, page, file, load) {
   const user = getUser();
   // go to user folder
   const userRef = storage.ref().child(user.uid);
@@ -187,16 +187,20 @@ export async function uploadImageToCloud(memory, page, file, setPercent) {
       "state_changed",
       (snapshot) => {
         //get percent of change
-        setPercent(snapshot.bytesTransferred / snapshot.totalBytes);
+        var percent = snapshot.bytesTransferred / snapshot.totalBytes;
       },
       (error) => {
         throw DescribeError(error);
       },
       () => {
-        // successful upload return reference
-        return "success";
+        // reload the images upon successful upload
+        load();
       }
     );
+
+    uploadTask.then((task) => {
+      return "Success";
+    });
   } catch (error) {
     throw DescribeError(error);
   }

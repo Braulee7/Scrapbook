@@ -4,35 +4,90 @@ import Image from "../image";
 import { useEffect, useState } from "react";
 import ImageCarousel from "../image-carousel";
 import UploadFile from "../upload-file";
+import Backdrop from "../backdrop";
+import ErrorMessage from "../error-message";
+import "./index.css";
+import { AnimatePresence } from "framer-motion";
 
 function ImageContainer({ memory, page }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const [favourites, setFavourites] = useState([]);
+  const [message, setMessage] = useState();
+
+  const loadImages = async () => {
+    // set loading screen
+    setLoading(true);
+
+    // wait for images
+    const response = await getImages(memory, page);
+    console.log("got images");
+    // set the images and turn off loading
+    setImages(response);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const loadImages = async () => {
-      // set loading screen
-      setLoading(true);
-
-      // wait for images
-      const response = await getImages(memory, page);
-      // set the images and turn off loading
-      setImages(response);
-      setLoading(false);
-    };
     loadImages();
   }, [memory, page]);
+
+  // get the top three favourite images
+  useEffect(() => {
+    var newFav = [];
+    for (let i = 0; i < 3 && i < images.length; i++) {
+      const image = (
+        <Image className={`favourite-${i}`} url={images[i]} key={i} />
+      );
+      newFav.push(image);
+    }
+
+    setFavourites(newFav);
+  }, [images]);
+
+  const viewAll = (e) => {
+    e.preventDefault();
+    setShowAll(true);
+  };
+
+  const exitViewAll = (e = null) => {
+    e && e.preventDefault();
+
+    setShowAll(false);
+  };
 
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-        <div className="image-container">
-          <ImageCarousel images={images} />
-        </div>
+        <>
+          <div className="image-container">
+            {favourites.map((element) => element)}
+
+            <button className="view-all-btn" onClick={viewAll}>
+              View all
+            </button>
+          </div>
+        </>
       )}
-      <UploadFile memory={memory} page={page} />
+      {showAll && (
+        <Backdrop callback={exitViewAll}>
+          <ImageCarousel images={images} />
+          <UploadFile
+            setMessage={setMessage}
+            memory={memory}
+            page={page}
+            load={loadImages}
+            clear={exitViewAll}
+          />
+        </Backdrop>
+      )}
+      {message && (
+        <AnimatePresence>
+          <ErrorMessage message={message} setMessage={setMessage} />
+        </AnimatePresence>
+      )}
     </>
   );
 }
