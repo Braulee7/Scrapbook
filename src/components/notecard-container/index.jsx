@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import Loading from "../loading";
 import NoteCardSection from "../notecard-section";
 import CarouselSelector from "../carousell-selector";
+import Backdrop from "../backdrop";
+import AddNotcard from "../add-notecard";
 
 function NotecardContainer({ memory, page }) {
   const [notecards, loading] = useCollectionData(getNotecards(memory, page), {
@@ -16,6 +18,7 @@ function NotecardContainer({ memory, page }) {
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [currPage, setCurrPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [addNotecard, setAddNotecard] = useState(false);
   const swipeConfidenceThreshold = 1000;
 
   useEffect(() => {
@@ -53,6 +56,11 @@ function NotecardContainer({ memory, page }) {
     }
   };
 
+  const clear = (e = null) => {
+    e && e.preventDefault();
+    setAddNotecard(false);
+  };
+
   while (loading) {
     return <Loading />;
   }
@@ -60,31 +68,45 @@ function NotecardContainer({ memory, page }) {
   return (
     <div className="notecard-component">
       <div className="notecard-list-container">
-        <motion.div
-          key={currPage}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          exit="exit"
-          animate="center"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = handleSwipe(offset.x, velocity.x);
+        {notecardSections && notecardSections.length > 0 ? (
+          <motion.div
+            key={currPage}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            exit="exit"
+            animate="center"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = handleSwipe(offset.x, velocity.x);
 
-            if (swipe < -swipeConfidenceThreshold) goNext(e);
-            else if (swipe > swipeConfidenceThreshold) goPrev(e);
-          }}
-        >
-          {notecardSections && notecardSections[currPage]}
-        </motion.div>
+              if (swipe < -swipeConfidenceThreshold) goNext(e);
+              else if (swipe > swipeConfidenceThreshold) goPrev(e);
+            }}
+          >
+            {notecardSections[currPage]}
+          </motion.div>
+        ) : (
+          <h2 className="empty-notecard">
+            No notecards on this page, add one by clicking below!
+          </h2>
+        )}
       </div>
       <CarouselSelector numberOfPages={numberOfPages} pageNumber={currPage} />
+      <button className="add-btn" onClick={(e) => setAddNotecard(true)}>
+        Add Notecard
+      </button>
+      {addNotecard && (
+        <Backdrop callback={clear}>
+          <AddNotcard memory={memory} page={page} exit={clear} />
+        </Backdrop>
+      )}
     </div>
   );
 }

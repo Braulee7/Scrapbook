@@ -142,6 +142,17 @@ export function getNotecards(memory, page) {
   return ref;
 }
 
+export async function addNotecard(memory, page, text) {
+  const ref = getNotecards(memory, page);
+
+  try {
+    const id = await ref.add({ text: text });
+    return id;
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
 export async function getImages(memory, page) {
   const user = getUser();
   // go to user folder
@@ -185,10 +196,7 @@ export async function uploadImageToCloud(memory, page, file, load) {
     // wait for file to upload
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        //get percent of change
-        var percent = snapshot.bytesTransferred / snapshot.totalBytes;
-      },
+      (snapshot) => {},
       (error) => {
         throw DescribeError(error);
       },

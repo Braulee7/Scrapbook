@@ -22,7 +22,6 @@ function ImageContainer({ memory, page }) {
 
     // wait for images
     const response = await getImages(memory, page);
-    console.log("got images");
     // set the images and turn off loading
     setImages(response);
     setLoading(false);
@@ -30,7 +29,7 @@ function ImageContainer({ memory, page }) {
 
   useEffect(() => {
     loadImages();
-  }, [memory, page]);
+  }, []);
 
   // get the top three favourite images
   useEffect(() => {

@@ -8,7 +8,8 @@ import "./index.css";
 function NoteDescriptionComponent({ memory, page }) {
   const [desc, setDesc] = useState();
   getDescription(memory, page).then((res) => {
-    setDesc(res);
+    if (res == null) setDesc("");
+    else setDesc(res);
   });
 
   while (desc == null) {

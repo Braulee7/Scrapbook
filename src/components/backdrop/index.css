@@ -11,6 +11,12 @@
 
 .children {
   z-index: 30;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 95vw;
+  overflow: hidden;
 }
 
 .back-drop {

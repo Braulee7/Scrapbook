@@ -27,3 +27,18 @@
   width: 100%;
   margin: 0 50%;
 }
+
+.add-btn {
+  background-color: var(--purple);
+  border-radius: 8px;
+  border: 2px solid var(--pink);
+  font-weight: bold;
+  height: 35px;
+}
+
+.empty-notecard {
+  text-align: center;
+  width: 75%;
+  text-transform: uppercase;
+  color: var(--dark-blue);
+}

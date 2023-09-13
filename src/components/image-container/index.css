@@ -1,9 +1,12 @@
 .image-container {
   display: grid;
   background-color: var(--white);
-
+  border-radius: 8px;
+  width: 95%;
+  height: 550px;
+  padding-top: 2rem;
   /* grid template set up */
-  grid-template-columns: [first] 30px [col-2] 207px [mid-section] 30px [col-3] 207px [col-4] 30px [end];
+  grid-template-columns: [first] 2% [col-2] 175px [mid-section] 0 [col-3] 175px [col-4] 2% [end];
   grid-template-rows: [start] 4% [row-1] 20% [row-2] 10% [row-3] 15% [row-4] 100px [row-5] 50px [end];
 }
 
