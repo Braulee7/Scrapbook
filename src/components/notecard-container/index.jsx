@@ -10,9 +10,7 @@ import Backdrop from "../backdrop";
 import AddNotcard from "../add-notecard";
 
 function NotecardContainer({ memory, page }) {
-  const [notecards, loading] = useCollectionData(getNotecards(memory, page), {
-    idField: "id",
-  });
+  const [notecards, loading] = useCollectionData(getNotecards(memory, page));
   const [notecardSections, setNotecardSections] = useState();
   const [itemsPerSection, setItemsPerSection] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);

@@ -1,0 +1,32 @@
+.table-of-contents {
+  background-color: var(--dark-blue);
+  border-radius: 8px;
+  border: solid 3px var(--pink);
+  display: flex;
+  flex-direction: column;
+}
+
+.table-of-contents h1 {
+  width: 97%;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--grey);
+
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.table-of-contents ul {
+}
+
+.page-toc {
+  background-color: var(--purple);
+  width: 200px;
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: large;
+
+  height: 35px;
+  border-radius: 8px;
+}

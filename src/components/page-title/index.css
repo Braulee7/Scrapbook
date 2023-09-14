@@ -1,0 +1,19 @@
+.page-title {
+  background-color: var(--purple);
+  height: 40px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  border: solid 3px var(--grey);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.page-title h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}

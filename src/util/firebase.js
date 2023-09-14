@@ -121,9 +121,8 @@ export async function addMemory(name) {
 }
 
 export async function getDescription(memory, page) {
-  const user = getUser();
   try {
-    const ref = getMemories(user.uid).doc(memory).collection("Pages").doc(page);
+    const ref = getPages(memory).doc(page);
     const doc = await ref.get();
     return doc.data().Description;
   } catch (error) {
@@ -132,14 +131,12 @@ export async function getDescription(memory, page) {
 }
 
 export function getNotecards(memory, page) {
-  const user = getUser();
-  const ref = getMemories(user.uid)
-    .doc(memory)
-    .collection("Pages")
-    .doc(page)
-    .collection("Notes");
-
-  return ref;
+  try {
+    const ref = getPages(memory).doc(page).collection("Notes");
+    return ref;
+  } catch (error) {
+    throw DescribeError(error);
+  }
 }
 
 export async function addNotecard(memory, page, text) {
@@ -209,6 +206,15 @@ export async function uploadImageToCloud(memory, page, file, load) {
     uploadTask.then((task) => {
       return "Success";
     });
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
+export function getPages(memory) {
+  const user = getUser();
+  try {
+    return getMemories(user.uid).doc(memory).collection("Pages");
   } catch (error) {
     throw DescribeError(error);
   }

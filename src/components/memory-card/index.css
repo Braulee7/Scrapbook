@@ -12,6 +12,10 @@
   width: 206px;
 }
 
+.card-container:hover {
+  cursor: pointer;
+}
+
 .title {
   text-align: center;
   width: 100%;
