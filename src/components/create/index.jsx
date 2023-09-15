@@ -52,7 +52,6 @@ function CreateAccount({ setErrorMessage }) {
     } else {
       // get message based on components which are invalid
       const message = validationMessage(validPassword, matching, validEmail);
-      console.log(message);
       setErrorMessage(message);
     }
   };
@@ -148,7 +147,8 @@ function validationMessage(validPassword, matching, validEmail) {
   if (!validEmail) {
     messages.push(
       <>
-        Email is not valid! <br />
+        Email is not valid!
+        <br />
       </>
     );
   }

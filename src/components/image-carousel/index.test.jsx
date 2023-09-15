@@ -25,7 +25,7 @@ test("Image Carousel has no images", () => {
   // ACT
 
   // ASSERT
-  expect(ImageCarouselDiv).toBeNull();
+  expect(ImageCarouselDiv).toBeEmptyDOMElement();
 });
 
 jest.mock("../../assets/svg/arrow-button.svg", () => ({

@@ -7,7 +7,7 @@ function CarouselSelector({ numberOfPages, pageNumber }) {
     pages[i] = i;
   }
   const carousel = pages.map((page) => (
-    <CarouselItem key={page} active={page === pageNumber ? false : true} />
+    <CarouselItem key={page} active={page === pageNumber ? true : false} />
   ));
   return (
     <>

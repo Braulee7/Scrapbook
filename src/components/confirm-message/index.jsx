@@ -7,7 +7,7 @@ function ConfirmMessage({ message, confirmCallback, closeCallback }) {
     <>
       <Backdrop callback={closeCallback}>
         <div className="confirm-container">
-          <h1>Confirm {message}</h1>
+          <h1 data-testid="confirm-message">Confirm {message}</h1>
           <div className="buttons">
             <button onClick={closeCallback}>
               <img src={cross} alt="Cancel" />

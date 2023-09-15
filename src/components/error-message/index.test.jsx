@@ -4,6 +4,7 @@ import ErrorMessage from "./index";
 
 test("Error Message has message", () => {
   // ARRANGE
+  window.HTMLElement.prototype.scrollIntoView = function () {};
   const message = "This is a test message.";
   render(<ErrorMessage message={message} />);
 

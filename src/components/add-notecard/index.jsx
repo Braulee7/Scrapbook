@@ -5,7 +5,7 @@ import ErrorMessage from "../error-message";
 
 function AddNotcard({ memory, page, exit }) {
   const [text, setText] = useState("");
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     setText(text);
@@ -41,7 +41,7 @@ function AddNotcard({ memory, page, exit }) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Add Notecard</button>
+        <button>Add Notecard</button>
       </form>
     </>
   );

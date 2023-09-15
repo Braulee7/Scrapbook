@@ -19,7 +19,7 @@ function AddMemoryForm({ close, setMessage }) {
         await addMemory(name);
         close();
       } catch (error) {
-        setMessage(error);
+        setMessage(`${error}`);
       }
     }
   };

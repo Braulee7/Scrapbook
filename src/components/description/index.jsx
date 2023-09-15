@@ -4,8 +4,8 @@ function Description({ desc }) {
   return (
     <>
       <div className="description-container">
-        <p className="desc">
-          {desc === "" ? "Description will be set when page is created" : desc}
+        <p data-testid="description" className="desc">
+          {desc === "" || !desc ? "Error: no description found" : desc}
         </p>
       </div>
     </>

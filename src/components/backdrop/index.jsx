@@ -9,7 +9,11 @@ function Backdrop({ children, callback }) {
   return (
     <>
       <div className="parent">
-        <div className="back-drop" onClick={callback}></div>
+        <div
+          className="back-drop"
+          data-testid="backdrop"
+          onClick={callback}
+        ></div>
         <div className="children" ref={ref}>
           {children}
         </div>
