@@ -17,7 +17,7 @@ function SignIn({ setErrorMessage }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // check if values are valid (have characters)
-    if (password < 8) {
+    if (password.length < 8) {
       setErrorMessage("Password is not valid");
       return;
     }

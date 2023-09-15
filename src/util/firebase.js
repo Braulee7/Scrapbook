@@ -7,31 +7,37 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyDd5a5UZX0EC3q-0b3ErX2CySVeVN4wkCU",
-  authDomain: "scrapbook-b08ae.firebaseapp.com",
-  projectId: "scrapbook-b08ae",
-  storageBucket: "scrapbook-b08ae.appspot.com",
-  messagingSenderId: "888543369377",
-  appId: "1:888543369377:web:8a7f9e1e79a041c23c38e0",
-  measurementId: "G-LBKM2MW25B",
-});
+if (!firebase.apps.length) {
+  firebase.initializeApp({
+    apiKey: "AIzaSyDd5a5UZX0EC3q-0b3ErX2CySVeVN4wkCU",
+    authDomain: "scrapbook-b08ae.firebaseapp.com",
+    projectId: "scrapbook-b08ae",
+    storageBucket: "scrapbook-b08ae.appspot.com",
+    messagingSenderId: "888543369377",
+    appId: "1:888543369377:web:8a7f9e1e79a041c23c38e0",
+    measurementId: "G-LBKM2MW25B",
+  });
+}
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-const storage = firebase.storage();
+function getStorage() {
+  return firebase.storage();
+}
+
+function getFirestore() {
+  return firebase.firestore();
+}
 
 export function getAuth() {
-  return auth;
+  return firebase.auth();
 }
 
 export function getUser() {
-  return auth.currentUser;
+  return getAuth().currentUser;
 }
 
 export async function SignOutUser() {
   try {
-    await firebase.auth().signOut();
+    await getAuth().signOut();
   } catch (error) {
     throw DescribeError(error.code);
   }
@@ -40,7 +46,7 @@ export async function SignOutUser() {
 export async function CreateWithEmail(email, password) {
   try {
     const userCredentials = await createUserWithEmailAndPassword(
-      auth,
+      getAuth(),
       email,
       password
     );
@@ -53,7 +59,7 @@ export async function CreateWithEmail(email, password) {
 
 export async function SignInWithEmail(email, password) {
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
+    const user = await signInWithEmailAndPassword(getAuth(), email, password);
     addUser(user.user.uid);
   } catch (error) {
     throw DescribeError(error.code);
@@ -63,7 +69,7 @@ export async function SignInWithEmail(email, password) {
 export async function SignInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
-    const result = await auth.signInWithPopup(provider);
+    const result = await getAuth().signInWithPopup(provider);
     addUser(result.user.uid);
   } catch (error) {
     throw DescribeError(error.code);
@@ -71,13 +77,16 @@ export async function SignInWithGoogle() {
 }
 
 export function getMemories(uid) {
-  const ref = firestore.collection("Users").doc(uid).collection("Memories");
+  const ref = getFirestore()
+    .collection("Users")
+    .doc(uid)
+    .collection("Memories");
   const query = ref;
   return query;
 }
 
 export function addUser(uid) {
-  var ref = firestore.collection("Users");
+  var ref = getFirestore().collection("Users");
   // check if the user is already in db
   ref
     .doc(uid)
@@ -101,7 +110,7 @@ export async function addMemory(name) {
   const uid = getUser().uid;
   const memoryExists = `Memory with name "${name}" already exists`;
 
-  var ref = firestore.collection("Users").doc(uid).collection("Memories");
+  var ref = getFirestore().collection("Users").doc(uid).collection("Memories");
 
   // make sure there is no other doc with the same name
   try {
@@ -153,7 +162,7 @@ export async function addNotecard(memory, page, text) {
 export async function getImages(memory, page) {
   const user = getUser();
   // go to user folder
-  const userRef = storage.ref().child(user.uid);
+  const userRef = getStorage().ref().child(user.uid);
   // image folder
   const imageFolder = userRef.child(`${memory}/${page}`);
 
@@ -183,7 +192,7 @@ export async function getUrlFromImageRef(ref) {
 export async function uploadImageToCloud(memory, page, file, load) {
   const user = getUser();
   // go to user folder
-  const userRef = storage.ref().child(user.uid);
+  const userRef = getStorage().ref().child(user.uid);
   const fileName = file.name.split(" ").join("_");
   // image folder
   const image = userRef.child(`${memory}/${page}/${fileName}`);
