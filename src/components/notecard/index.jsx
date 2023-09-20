@@ -4,7 +4,9 @@ function Notecard({ text }) {
   return (
     <>
       <div className="notecard-container purple">
-        <p className="text">{text}</p>
+        <p data-testid="notecard-text" className="text">
+          {text}
+        </p>
       </div>
     </>
   );

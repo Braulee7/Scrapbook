@@ -87,6 +87,7 @@ function NotecardContainer({ memory, page }) {
               if (swipe < -swipeConfidenceThreshold) goNext(e);
               else if (swipe > swipeConfidenceThreshold) goPrev(e);
             }}
+            data-testid="notecard-section"
           >
             {notecardSections[currPage]}
           </motion.div>

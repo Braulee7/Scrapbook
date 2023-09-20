@@ -6,6 +6,7 @@ function NavigationButton({ orientation, handleClick }) {
   return (
     <>
       <img
+        data-testid="navigation-button"
         onClick={handleClick}
         className={orientation === 1 ? "right navigation" : "navigation"}
         src={button}

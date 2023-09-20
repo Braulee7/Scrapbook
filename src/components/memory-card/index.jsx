@@ -11,8 +11,14 @@ function MemoryCard({ title }) {
 
   return (
     <>
-      <button onClick={redirect} className="card-container">
-        <h1 className="title">{title}</h1>
+      <button
+        data-testid="memory-card"
+        onClick={redirect}
+        className="card-container"
+      >
+        <h1 data-testid="memory-title" className="title">
+          {title}
+        </h1>
       </button>
     </>
   );

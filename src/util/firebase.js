@@ -23,7 +23,7 @@ function getStorage() {
   return firebase.storage();
 }
 
-function getFirestore() {
+export function getFirestore() {
   return firebase.firestore();
 }
 
