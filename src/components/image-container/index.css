@@ -10,6 +10,19 @@
   grid-template-rows: [start] 4% [row-1] 20% [row-2] 10% [row-3] 15% [row-4] 100px [row-5] 50px [end];
 }
 
+.image-container h1 {
+  /* visual effects */
+  color: var(--dark-blue);
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 30px;
+
+  /* grid set up */
+  grid-column-start: col-2;
+  grid-row-start: row-2;
+  grid-column-end: end;
+}
+
 .favourite-0 {
   grid-column-start: col-2;
   grid-row-start: row-1;

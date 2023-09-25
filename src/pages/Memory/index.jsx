@@ -23,6 +23,16 @@ function Memory() {
     if (pages) setNumberOfPages(pages.length);
   }, [pages]);
 
+  useEffect(() => {
+    if (currPage < 0) setCurrPage(numberOfPages - 1);
+    if (currPage >= numberOfPages) setCurrPage(0);
+  }, [currPage, numberOfPages]);
+
+  const changePage = (index) => {
+    setCurrPage(index);
+    setShowTOC(false);
+  };
+
   const goNext = (e) => {
     e.preventDefault();
     if (currPage + 1 < numberOfPages) setCurrPage(currPage + 1);
@@ -52,7 +62,7 @@ function Memory() {
       <section className="header">
         {showTOC && (
           <Backdrop callback={exitToc}>
-            <PageTOC memory={memory} pages={pages} />
+            <PageTOC memory={memory} pages={pages} goToPage={changePage} />
           </Backdrop>
         )}
         <div className="child1">

@@ -19,7 +19,6 @@ function ImageContainer({ memory, page }) {
   const loadImages = async () => {
     // set loading screen
     setLoading(true);
-
     // wait for images
     const response = await getImages(memory, page);
     // set the images and turn off loading
@@ -62,7 +61,11 @@ function ImageContainer({ memory, page }) {
       ) : (
         <>
           <div className="image-container">
-            {favourites.map((element) => element)}
+            {images.length > 0 ? (
+              favourites.map((element) => element)
+            ) : (
+              <h1>No Images click view all to add some</h1>
+            )}
 
             <button className="view-all-btn" onClick={viewAll}>
               View all

@@ -30,3 +30,22 @@
   height: 35px;
   border-radius: 8px;
 }
+
+.page-toc:hover {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  transform: translateY(-2px);
+}
+
+.toggle-add {
+  width: 200px;
+  background-color: var(--grey);
+  height: 35px;
+  border-radius: 8px;
+  color: var(--dark-blue);
+  font-size: large;
+  font-weight: bold;
+  text-transform: uppercase;
+}

@@ -229,6 +229,15 @@ export function getPages(memory) {
   }
 }
 
+export function addPage(memory, name, desc) {
+  const pages = getPages(memory);
+  try {
+    pages.doc(name).set({ name: name, Description: desc });
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
 function DescribeError(code) {
   switch (code) {
     case "auth/wrong-password":

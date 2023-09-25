@@ -6,7 +6,7 @@ function Page({ memory, page }) {
   return (
     <>
       <div className="page-container">
-        <ImageContainer memory={memory} page={page} />
+        <ImageContainer key={page} memory={memory} page={page} />
         <NoteDescriptionComponent memory={memory} page={page} />
       </div>
     </>
