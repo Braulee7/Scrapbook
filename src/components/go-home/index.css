@@ -1,0 +1,9 @@
+.go-home {
+  width: 100px;
+  height: 43px;
+  background-color: var(--grey);
+  color: var(--dark-blue);
+  font-weight: bold;
+
+  border-radius: 8px;
+}

@@ -1,12 +1,21 @@
 import google_logo from "../../assets/svg/google.svg";
 import { SignInWithGoogle } from "../../util/firebase";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 function LoginForm({ form, setErrorMessage }) {
+  const navigate = useNavigate();
+
+  const redirect = (e = null) => {
+    e && e.preventDefault();
+    navigate(`/`);
+  };
+
   const handleGoogleClick = async (e) => {
     e.preventDefault();
     try {
       await SignInWithGoogle();
+      redirect();
     } catch (error) {
       console.log(`error: ${error}`);
       setErrorMessage(`${error}`);

@@ -2,6 +2,7 @@ import "./index.css";
 import { useState } from "react";
 import AddPage from "../add-page";
 import Backdrop from "../backdrop";
+import GoHome from "../go-home";
 function PageTOC({ memory, pages, goToPage }) {
   const [adding, setAdding] = useState(false);
   const toggleAddOn = (e) => {
@@ -41,6 +42,7 @@ function PageTOC({ memory, pages, goToPage }) {
         <button onClick={toggleAddOn} className="toggle-add">
           Add new page
         </button>
+        <GoHome />
       </div>
     </>
   );

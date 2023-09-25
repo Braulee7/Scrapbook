@@ -11,6 +11,7 @@ import PageTOC from "../../components/page-toc";
 import PageTOCBtn from "../../components/page-toc-btn";
 import PageTitle from "../../components/page-title";
 import Backdrop from "../../components/backdrop";
+import NoPage from "../../components/no-page";
 
 function Memory() {
   const { memory } = useParams();
@@ -59,25 +60,35 @@ function Memory() {
 
   return (
     <div className="memory-container">
-      <section className="header">
-        {showTOC && (
-          <Backdrop callback={exitToc}>
-            <PageTOC memory={memory} pages={pages} goToPage={changePage} />
-          </Backdrop>
-        )}
-        <div className="child1">
-          <PageTOCBtn clicked={tocBtnClick} />
-        </div>
-        <div className="child2">
-          <PageTitle title={pages[currPage].name} />
-        </div>
-      </section>
-      <Page memory={memory} page={pages[currPage].name} />
-      <section className="carousel">
-        <NavigationButton orientation={0} handleClick={goPrev} />
-        <CarouselSelector numberOfPages={numberOfPages} pageNumber={currPage} />
-        <NavigationButton orientation={1} handleClick={goNext} />
-      </section>
+      {pages.length > 0 ? (
+        <>
+          <section className="header">
+            {showTOC && (
+              <Backdrop callback={exitToc}>
+                <PageTOC memory={memory} pages={pages} goToPage={changePage} />
+              </Backdrop>
+            )}
+
+            <div className="child1">
+              <PageTOCBtn clicked={tocBtnClick} />
+            </div>
+            <div className="child2">
+              <PageTitle title={pages[currPage].name} />
+            </div>
+          </section>
+          <Page memory={memory} page={pages[currPage].name} />
+          <section className="carousel">
+            <NavigationButton orientation={0} handleClick={goPrev} />
+            <CarouselSelector
+              numberOfPages={numberOfPages}
+              pageNumber={currPage}
+            />
+            <NavigationButton orientation={1} handleClick={goNext} />
+          </section>
+        </>
+      ) : (
+        <NoPage memory={memory} />
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SignInWithEmail } from "../../util/firebase";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 function SignIn({ setErrorMessage }) {
@@ -14,6 +15,13 @@ function SignIn({ setErrorMessage }) {
     setEmail(email);
   }, [email]);
 
+  const navigate = useNavigate();
+
+  const redirect = (e = null) => {
+    e && e.preventDefault();
+    navigate(`/`);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // check if values are valid (have characters)
@@ -25,6 +33,7 @@ function SignIn({ setErrorMessage }) {
     // try to sign in user
     try {
       await SignInWithEmail(email, password);
+      redirect();
     } catch (error) {
       setErrorMessage(`${error}`);
     }
