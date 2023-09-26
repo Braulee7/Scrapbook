@@ -49,3 +49,23 @@
   font-weight: bold;
   text-transform: uppercase;
 }
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.sign-out {
+  width: 100px;
+  height: 43px;
+  background-color: var(--grey);
+  color: var(--dark-blue);
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+}
