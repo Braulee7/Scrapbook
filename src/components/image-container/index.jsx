@@ -28,7 +28,7 @@ function ImageContainer({ memory, page }) {
 
   useEffect(() => {
     loadImages();
-  }, []);
+  });
 
   // get the top three favourite images
   useEffect(() => {

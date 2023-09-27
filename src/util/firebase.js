@@ -81,8 +81,7 @@ export function getMemories(uid) {
     .collection("Users")
     .doc(uid)
     .collection("Memories");
-  const query = ref;
-  return query;
+  return ref;
 }
 
 export function addUser(uid) {
@@ -160,24 +159,27 @@ export async function addNotecard(memory, page, text) {
 }
 
 export async function getImages(memory, page) {
-  const user = getUser();
-  // go to user folder
-  const userRef = getStorage().ref().child(user.uid);
-  // image folder
-  const imageFolder = userRef.child(`${memory}/${page}`);
-
   try {
-    const imagesRes = await imageFolder.listAll();
+    const imageRes = await getImageRefs(memory, page);
     var images = [];
-    const numberOfImages = imagesRes.items.length;
+    const numberOfImages = imageRes.items.length;
     for (let i = 0; i < numberOfImages; i++) {
-      let url = await getUrlFromImageRef(imagesRes.items[i]);
+      let url = await getUrlFromImageRef(imageRes.items[i]);
       images.push(url);
     }
     return images;
   } catch (error) {
     throw DescribeError(error);
   }
+}
+
+async function getImageRefs(memory, page) {
+  const user = getUser();
+  // go to user folder
+  const userRef = getStorage().ref().child(user.uid);
+  // image folder
+  const imageFolder = userRef.child(`${memory}/${page}`);
+  return imageFolder.listAll();
 }
 
 export async function getUrlFromImageRef(ref) {
@@ -236,6 +238,63 @@ export function addPage(memory, name, desc) {
   } catch (error) {
     throw DescribeError(error);
   }
+}
+
+export function deleteContent(type, options) {
+  switch (type) {
+    case "memory":
+      deleteMemory(options);
+      break;
+    case "page":
+      deletePage(options);
+      break;
+    case "notecard":
+      deleteNotecard(options);
+      break;
+    default:
+      break;
+  }
+}
+
+// to delete a memory we need to delete all it's pages
+async function deleteMemory(options) {
+  const pages = await getPages(options.memory).get();
+  // go through each document and delete it
+  pages.forEach(async (doc) => {
+    await deletePage({ memory: options.memory, page: doc.id });
+  });
+  // delete the memory
+  const memory = await getMemories(getUser().uid).doc(options.memory);
+  await memory.delete();
+}
+
+// to delete a page we need to delete all it's notecards and images
+async function deletePage(options) {
+  // go through each notecard and delete it
+  const notecards = await getNotecards(options.memory, options.page).get();
+  notecards.forEach(async (doc) => {
+    await deleteNotecard({
+      memory: options.memory,
+      page: options.page,
+      notecard: doc.id,
+    });
+  });
+  // go through each image and delete it
+  const images = await getImageRefs(options.memory, options.page);
+  images.items.forEach(async (image) => {
+    await image.delete();
+  });
+  // delete the page
+  const page = await getPages(options.memory).doc(options.page);
+  await page.delete();
+}
+
+async function deleteNotecard(options) {
+  console.log(options);
+  const notecard = await getNotecards(options.memory, options.page).doc(
+    options.notecard
+  );
+  notecard.delete();
 }
 
 function DescribeError(code) {

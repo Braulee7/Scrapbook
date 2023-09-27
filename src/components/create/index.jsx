@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import { CreateWithEmail } from "../../util/firebase";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 import ValidationMessage from "../validation";
 
@@ -19,6 +20,7 @@ function CreateAccount({ setErrorMessage }) {
     lowerCase: false,
     upperCase: false,
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValidEmail(validateEmail(email));
@@ -37,6 +39,11 @@ function CreateAccount({ setErrorMessage }) {
     );
   }, [passwordState]);
 
+  const redirect = (e = null) => {
+    e && e.preventDefault();
+    navigate(`/`);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,6 +52,7 @@ function CreateAccount({ setErrorMessage }) {
       console.log("Creating account");
       try {
         await CreateWithEmail(email, password);
+        redirect();
       } catch (error) {
         setErrorMessage(`${error}`);
         console.log(`setting error message to ${error}`);

@@ -5,6 +5,7 @@ import AddPage from "../add-page";
 import Backdrop from "../backdrop";
 import GoHome from "../go-home";
 import ConfirmMessage from "../confirm-message";
+import Delete from "../delete";
 
 function PageTOC({ memory, pages, goToPage }) {
   const [adding, setAdding] = useState(false);
@@ -55,6 +56,7 @@ function PageTOC({ memory, pages, goToPage }) {
               >
                 {page.name}
               </button>
+              <Delete type="page" options={{ memory, page: page.name }} />
             </li>
           ))}
         </ul>
