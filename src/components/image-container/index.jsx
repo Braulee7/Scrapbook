@@ -1,7 +1,7 @@
 import { getImages } from "../../util/firebase";
 import Loading from "../loading";
 import Image from "../image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ImageCarousel from "../image-carousel";
 import UploadFile from "../upload-file";
 import Backdrop from "../backdrop";
@@ -25,10 +25,11 @@ function ImageContainer({ memory, page }) {
     setImages(response);
     setLoading(false);
   };
+  const load = useCallback(loadImages, [memory, page]);
 
   useEffect(() => {
-    loadImages();
-  });
+    load();
+  }, [load]);
 
   // get the top three favourite images
   useEffect(() => {
