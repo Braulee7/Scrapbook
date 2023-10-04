@@ -61,16 +61,18 @@ function ImageContainer({ memory, page }) {
         <Loading />
       ) : (
         <>
-          <div className="image-container">
-            {images.length > 0 ? (
-              favourites.map((element) => element)
-            ) : (
-              <h1>No Images click view all to add some</h1>
-            )}
+          <div className="image-placeholder-container">
+            <div className="image-container">
+              {images.length > 0 ? (
+                favourites.map((element) => element)
+              ) : (
+                <h1>No Images click view all to add some</h1>
+              )}
 
-            <button className="view-all-btn" onClick={viewAll}>
-              View all
-            </button>
+              <button className="view-all-btn" onClick={viewAll}>
+                View all
+              </button>
+            </div>
           </div>
         </>
       )}

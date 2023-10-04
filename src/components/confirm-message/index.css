@@ -17,6 +17,11 @@
 .buttons {
   width: 50%;
   margin-top: 25%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(-25%);
 }
 
 .buttons button {

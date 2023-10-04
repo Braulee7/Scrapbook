@@ -16,15 +16,21 @@
   font-size: 30px;
 }
 
+.pages-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .page-toc {
   background-color: var(--purple);
+  height: fit-content;
   width: 200px;
   color: var(--white);
   text-transform: uppercase;
   font-weight: bold;
   font-size: large;
-
-  height: 35px;
   border-radius: 8px;
 }
 

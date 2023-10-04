@@ -46,7 +46,7 @@ function PageTOC({ memory, pages, goToPage }) {
         <h1>{memory}</h1>
         <ul>
           {pages.map((page, index) => (
-            <li key={index}>
+            <li className="pages-list" key={index}>
               <button
                 onClick={(e) => {
                   e.preventDefault();

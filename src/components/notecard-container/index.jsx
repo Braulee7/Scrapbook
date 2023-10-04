@@ -13,6 +13,10 @@ function NotecardContainer({ memory, page }) {
   const [notecards, loading] = useCollectionData(getNotecards(memory, page));
   const [notecardSections, setNotecardSections] = useState();
   const [itemsPerSection, setItemsPerSection] = useState(1);
+  const [screenSize, setScreenSize] = useState({
+    x: window.innerWidth,
+    y: window.innerHeight,
+  });
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [currPage, setCurrPage] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -29,6 +33,25 @@ function NotecardContainer({ memory, page }) {
   useEffect(() => {
     if (notecardSections) setNumberOfPages(notecardSections.length);
   }, [notecardSections]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        x: window.innerWidth,
+        y: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
+  useEffect(() => {
+    const items = screenSize.x > 725 && screenSize.x > 735 ? 3 : 1;
+    if (notecards && Math.ceil(notecards.length / items) < currPage) {
+      setCurrPage(0);
+    }
+    setItemsPerSection(items);
+  }, [screenSize, notecards, currPage]);
 
   const handleSwipe = (offset, velocity) => {
     return Math.abs(offset) * velocity;

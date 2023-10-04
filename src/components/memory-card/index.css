@@ -2,6 +2,8 @@
   background-color: var(--white);
   border-radius: 10px;
   border: var(--purple) solid 5px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 
   display: flex;
   justify-content: center;
@@ -14,6 +16,8 @@
 
 .card-container:hover {
   cursor: pointer;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .title {

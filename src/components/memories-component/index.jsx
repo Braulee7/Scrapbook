@@ -41,16 +41,18 @@ function MemoriesComponent({ uid, page }) {
         x: window.innerWidth,
         y: window.innerHeight,
       });
-      console.log(window.innerHeight);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   });
 
   useEffect(() => {
-    const items = screenSize.x > 875 && screenSize.y > 885 ? 4 : 1;
+    const items = screenSize.x > 875 && screenSize.x > 885 ? 4 : 1;
+    if (memories && Math.ceil(memories.length / items) < currPageNumber) {
+      setCurrPageNumber(0);
+    }
     setItemsPerPage(items);
-  }, [screenSize]);
+  }, [screenSize, memories, currPageNumber]);
 
   if (loading) {
     return <Loading />;

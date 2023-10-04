@@ -1,3 +1,7 @@
+.note-desc-placeholder-container {
+  width: 95%;
+}
+
 .note-desc-comp {
   background-color: var(--white);
   border-radius: 8px;
@@ -9,4 +13,22 @@
   gap: 2rem;
   padding: 3rem 0;
   width: 95vw;
+  height: 685px;
+  max-height: 751px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media screen and (min-width: 768px) {
+  .note-desc-placeholder-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+  }
+  .note-desc-comp {
+    width: 751px;
+    min-width: 700px;
+    max-width: 45vw;
+  }
 }

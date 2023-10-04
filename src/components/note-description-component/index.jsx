@@ -24,9 +24,11 @@ function NoteDescriptionComponent({ memory, page }) {
       {desc == null ? (
         <Loading />
       ) : (
-        <div data-testid="note-description-div" className="note-desc-comp">
-          <NotecardContainer memory={memory} page={page} />
-          <Description desc={desc} />
+        <div className="note-desc-placeholder-container">
+          <div data-testid="note-description-div" className="note-desc-comp">
+            <NotecardContainer memory={memory} page={page} />
+            <Description desc={desc} />
+          </div>
         </div>
       )}
     </>

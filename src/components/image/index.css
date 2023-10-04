@@ -6,11 +6,12 @@
 
   border: 3px solid var(--pink);
   border-radius: 10px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 @media screen and (min-width: 717px) {
   .firebase-image {
-    max-width: 247px;
-    max-height: 247px;
+    max-width: 267px;
+    max-height: 267px;
   }
 }
