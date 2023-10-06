@@ -1,5 +1,7 @@
+import "./index.css";
 import { useEffect, useState } from "react";
 import { uploadImageToCloud } from "../../util/firebase";
+import upload_image from "../../assets/svg/upload.svg";
 
 function UploadFile({ memory, page, load, setMessage, clear }) {
   const [files, setFiles] = useState();
@@ -36,12 +38,15 @@ function UploadFile({ memory, page, load, setMessage, clear }) {
     <>
       <div className="upload-container">
         <input
+          className="upload-input"
           type="file"
           accept="image/*"
           multiple={true}
           onChange={handleChange}
         />
-        <button onClick={upload}>Upload</button>
+        <button className="upload-btn" onClick={upload}>
+          <img src={upload_image} alt="Upload" />
+        </button>
       </div>
     </>
   );

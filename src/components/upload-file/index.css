@@ -1,0 +1,24 @@
+.upload-container {
+  background-color: var(--purple);
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.upload-btn {
+  background: none;
+  border: none;
+  transform: translateY(8px);
+}
+
+.upload-input::file-selector-button {
+  background-color: var(--pink);
+  border-radius: 8px;
+  height: 24px;
+  font-weight: bold;
+  color: var(--dark-blue);
+}
+
+.upload-input::file-selector-button:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+}
