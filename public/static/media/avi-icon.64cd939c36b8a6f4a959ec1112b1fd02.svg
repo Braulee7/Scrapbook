@@ -1,0 +1,7 @@
+<svg id="Account_Icon" data-name="Account Icon" xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+  <g id="Ellipse_14" data-name="Ellipse 14" fill="#4f646f" stroke="#707070" stroke-width="1">
+    <circle cx="26" cy="26" r="26" stroke="none"/>
+    <circle cx="26" cy="26" r="25.5" fill="none"/>
+  </g>
+  <path id="Icon_material-account-circle" data-name="Icon material-account-circle" d="M29,3A26,26,0,1,0,55,29,26.009,26.009,0,0,0,29,3Zm0,7.8a7.8,7.8,0,1,1-7.8,7.8A7.79,7.79,0,0,1,29,10.8Zm0,36.92a18.721,18.721,0,0,1-15.6-8.372c.078-5.174,10.4-8.008,15.6-8.008,5.174,0,15.522,2.834,15.6,8.008A18.721,18.721,0,0,1,29,47.72Z" transform="translate(-3 -3)" fill="#b7adcf"/>
+</svg>

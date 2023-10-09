@@ -1,0 +1,25 @@
+{
+  "short_name": "Scrapbook",
+  "name": "Scrapbooking made easy",
+  "icons": [
+    {
+      "src": "scrapbook_logo_32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "scrapbook_logo_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "scrapbook_logo_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
