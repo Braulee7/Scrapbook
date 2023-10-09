@@ -2,7 +2,8 @@
   background-color: var(--purple);
   max-height: 80px;
   height: fit-content;
-  width: 200px;
+  width: fit-content;
+  min-width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
