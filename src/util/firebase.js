@@ -158,8 +158,33 @@ export async function addNotecard(memory, page, text) {
   }
 }
 
+export async function getImageUrlCollection(memory, page) {
+  try {
+    return getPages(memory).doc(page).collection("ImageUrls");
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
+export async function addImageUrl(memory, page, url) {
+  const ref = await getImageUrlCollection(memory, page);
+
+  try {
+    const id = await ref.add({
+      url: url,
+      x: null,
+      y: null,
+    });
+    console.log(`Added url ${id}`);
+    return id;
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
 export async function getImages(memory, page) {
   try {
+    /*
     const imageRes = await getImageRefs(memory, page);
     var images = [];
     const numberOfImages = imageRes.items.length;
@@ -167,6 +192,8 @@ export async function getImages(memory, page) {
       let url = await getUrlFromImageRef(imageRes.items[i]);
       images.push(url);
     }
+    */
+    const images = await getImageUrlCollection(memory, page);
     return images;
   } catch (error) {
     throw DescribeError(error);
@@ -191,7 +218,7 @@ export async function getUrlFromImageRef(ref) {
   }
 }
 
-export async function uploadImageToCloud(memory, page, file, load) {
+export async function uploadImageToCloud(memory, page, file) {
   const user = getUser();
   // go to user folder
   const userRef = getStorage().ref().child(user.uid);
@@ -204,17 +231,19 @@ export async function uploadImageToCloud(memory, page, file, load) {
     // wait for file to upload
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => {}, // next
       (error) => {
+        // error
         throw DescribeError(error);
       },
-      () => {
-        // reload the images upon successful upload
-        load();
-      }
+      () => {}
     );
 
-    uploadTask.then((task) => {
+    uploadTask.then(async (task) => {
+      // upload the url to the firestore database
+      // for faster retrieval
+      const url = await getUrlFromImageRef(image);
+      addImageUrl(memory, page, url);
       return "Success";
     });
   } catch (error) {
