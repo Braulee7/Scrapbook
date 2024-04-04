@@ -158,42 +158,33 @@ export async function addNotecard(memory, page, text) {
   }
 }
 
-export async function getImageUrlCollection(memory, page) {
+export function getImageUrlCollection(memory, page) {
   try {
-    return getPages(memory).doc(page).collection("ImageUrls");
+    const ref = getPages(memory).doc(page).collection("ImageUrls");
+    return ref;
   } catch (error) {
     throw DescribeError(error);
   }
 }
 
 export async function addImageUrl(memory, page, url) {
-  const ref = await getImageUrlCollection(memory, page);
+  const ref = getImageUrlCollection(memory, page);
 
   try {
-    const id = await ref.add({
+    const id = await ref.doc(url).set({
       url: url,
       x: null,
       y: null,
     });
-    console.log(`Added url ${id}`);
     return id;
   } catch (error) {
     throw DescribeError(error);
   }
 }
 
-export async function getImages(memory, page) {
+export function getImages(memory, page) {
   try {
-    /*
-    const imageRes = await getImageRefs(memory, page);
-    var images = [];
-    const numberOfImages = imageRes.items.length;
-    for (let i = 0; i < numberOfImages; i++) {
-      let url = await getUrlFromImageRef(imageRes.items[i]);
-      images.push(url);
-    }
-    */
-    const images = await getImageUrlCollection(memory, page);
+    const images = getImageUrlCollection(memory, page);
     return images;
   } catch (error) {
     throw DescribeError(error);

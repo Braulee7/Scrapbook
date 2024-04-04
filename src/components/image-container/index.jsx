@@ -1,48 +1,18 @@
 import { getImages } from "../../util/firebase";
 import Loading from "../loading";
 import Image from "../image";
-import { useCallback, useEffect, useState } from "react";
-import ImageCarousel from "../image-carousel";
 import UploadFile from "../upload-file";
 import Backdrop from "../backdrop";
 import ErrorMessage from "../error-message";
-import "./index.css";
+import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import "./index.css";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 function ImageContainer({ memory, page }) {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [image_urls, loading] = useCollectionData(getImages(memory, page));
   const [showAll, setShowAll] = useState(false);
-  const [favourites, setFavourites] = useState([]);
   const [message, setMessage] = useState();
-
-  const loadImages = async () => {
-    // set loading screen
-    setLoading(true);
-    // wait for images
-    const response = await getImages(memory, page);
-    // set the images and turn off loading
-    setImages(response);
-    setLoading(false);
-  };
-  const load = useCallback(loadImages, [memory, page]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  // get the top three favourite images
-  useEffect(() => {
-    var newFav = [];
-    for (let i = 0; i < 3 && i < images.length; i++) {
-      const image = (
-        <Image className={`favourite-${i}`} url={images[i]} key={i} />
-      );
-      newFav.push(image);
-    }
-
-    setFavourites(newFav);
-  }, [images]);
 
   const viewAll = (e) => {
     e.preventDefault();
@@ -63,27 +33,21 @@ function ImageContainer({ memory, page }) {
         <>
           <div className="image-placeholder-container">
             <div className="image-container">
-              {images.length > 0 ? (
-                favourites.map((element) => element)
+              {image_urls.length > 0 ? (
+                image_urls.map((image, i) => <Image image={image} key={i} />)
               ) : (
-                <h1>No Images click view all to add some</h1>
+                <p>No Images Inserted yet</p>
               )}
-
-              <button className="view-all-btn" onClick={viewAll}>
-                View all
-              </button>
             </div>
           </div>
         </>
       )}
       {showAll && (
         <Backdrop callback={exitViewAll}>
-          <ImageCarousel images={images} />
           <UploadFile
             setMessage={setMessage}
             memory={memory}
             page={page}
-            load={loadImages}
             clear={exitViewAll}
           />
         </Backdrop>

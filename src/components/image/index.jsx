@@ -1,11 +1,22 @@
+import Draggable from "react-draggable";
 import "./index.css";
 
-function Image({ url, className }) {
+function Image({ image, className }) {
+  const handle_stop = () => {
+    console.log("Stopped");
+  };
   return (
     <>
-      <div className={`single-image-container ${className}`}>
-        <img className="firebase-image" src={url} alt={url} />
-      </div>
+      <Draggable bounds="parent" onStop={handle_stop}>
+        <div className={`single-image-container ${className}`}>
+          <img
+            draggable={false}
+            className="firebase-image"
+            src={image.url}
+            alt={image.url}
+          />
+        </div>
+      </Draggable>
     </>
   );
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { uploadImageToCloud } from "../../util/firebase";
 import upload_image from "../../assets/svg/upload.svg";
 
-function UploadFile({ memory, page, load, setMessage, clear }) {
+function UploadFile({ memory, page, setMessage, clear }) {
   const [files, setFiles] = useState();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function UploadFile({ memory, page, load, setMessage, clear }) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         if (vaildateFile(file)) {
-          await uploadImageToCloud(memory, page, files[i], load);
+          await uploadImageToCloud(memory, page, files[i]);
         } else {
           setMessage(
             "Error: Only the following file formats are accepted: {.jpg : .png : .jpeg }"
