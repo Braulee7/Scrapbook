@@ -4,6 +4,7 @@ import Image from "../image";
 import UploadFile from "../upload-file";
 import Backdrop from "../backdrop";
 import ErrorMessage from "../error-message";
+import AddItem from "../add-item";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import "./index.css";
@@ -13,11 +14,6 @@ function ImageContainer({ memory, page }) {
   const [image_urls, loading] = useCollectionData(getImages(memory, page));
   const [showAll, setShowAll] = useState(false);
   const [message, setMessage] = useState();
-
-  const viewAll = (e) => {
-    e.preventDefault();
-    setShowAll(true);
-  };
 
   const exitViewAll = (e = null) => {
     e && e.preventDefault();
@@ -38,6 +34,7 @@ function ImageContainer({ memory, page }) {
               ) : (
                 <p>No Images Inserted yet</p>
               )}
+              <AddItem memory={memory} page={page} />
             </div>
           </div>
         </>

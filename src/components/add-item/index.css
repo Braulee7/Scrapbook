@@ -1,0 +1,36 @@
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.create-item-container {
+  width: 20%;
+}
+
+.create-item-container button {
+  background-color: var(--purple);
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-item-container button img {
+  width: 80%;
+  height: 80%;
+  color: var(--white);
+}
+
+.create-items {
+  background-color: var(--purple);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px;
+}
+
+.create-items li {
+  list-style: none;
+  margin: 0;
+}

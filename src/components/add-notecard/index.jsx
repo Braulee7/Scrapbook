@@ -26,6 +26,7 @@ function AddNotcard({ memory, page, exit }) {
         await addNotecard(memory, page, text);
         exit();
       } catch (error) {
+        console.log(memory + page);
         setMessage(error);
       }
     }

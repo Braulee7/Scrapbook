@@ -151,6 +151,7 @@ export async function addNotecard(memory, page, text) {
   const ref = getNotecards(memory, page);
 
   try {
+    console.log(text);
     const id = await ref.add({ text: text });
     return id;
   } catch (error) {
@@ -167,11 +168,11 @@ export function getImageUrlCollection(memory, page) {
   }
 }
 
-export async function addImageUrl(memory, page, url) {
+export async function addImageUrl(memory, page, url, fileName) {
   const ref = getImageUrlCollection(memory, page);
 
   try {
-    const id = await ref.doc(url).set({
+    const id = await ref.doc(fileName).set({
       url: url,
       x: null,
       y: null,
@@ -234,7 +235,7 @@ export async function uploadImageToCloud(memory, page, file) {
       // upload the url to the firestore database
       // for faster retrieval
       const url = await getUrlFromImageRef(image);
-      addImageUrl(memory, page, url);
+      addImageUrl(memory, page, url, fileName);
       return "Success";
     });
   } catch (error) {
