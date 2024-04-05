@@ -174,10 +174,45 @@ export async function addImageUrl(memory, page, url, fileName) {
   try {
     const id = await ref.doc(fileName).set({
       url: url,
+      fileName: fileName,
       x: null,
       y: null,
+      mobileX: null,
+      mobileY: null,
     });
     return id;
+  } catch (error) {
+    throw DescribeError(error);
+  }
+}
+
+export async function updateImagePosition(
+  memory,
+  page,
+  image,
+  newX,
+  newY,
+  isMobile
+) {
+  const ref = getImageUrlCollection(memory, page).where(
+    "fileName",
+    "==",
+    image.fileName
+  );
+
+  try {
+    const querySnapshot = await ref.get();
+    querySnapshot.forEach((doc) => {
+      isMobile
+        ? doc.ref.update({
+            mobileX: newX,
+            mobileY: newY,
+          })
+        : doc.ref.update({
+            x: newX,
+            y: newY,
+          });
+    });
   } catch (error) {
     throw DescribeError(error);
   }
