@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Description from "../description";
 import NotecardContainer from "../notecard-container";
 import { getDescription } from "../../util/firebase";
 import Loading from "../loading";
@@ -27,7 +26,6 @@ function NoteDescriptionComponent({ memory, page }) {
         <div className="note-desc-placeholder-container">
           <div data-testid="note-description-div" className="note-desc-comp">
             <NotecardContainer memory={memory} page={page} />
-            <Description desc={desc} />
           </div>
         </div>
       )}

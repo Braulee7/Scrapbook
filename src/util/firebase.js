@@ -151,11 +151,43 @@ export async function addNotecard(memory, page, text) {
   const ref = getNotecards(memory, page);
 
   try {
-    console.log(text);
-    const id = await ref.add({ text: text });
+    // use the text to be the doc id for faster query times
+    // doesn't allow for multiple notecards with the same text
+    // though
+    const id = await ref
+      .doc(text)
+      .set({ text: text, x: null, y: null, mobileX: null, mobileY: null });
     return id;
   } catch (error) {
     throw DescribeError(error);
+  }
+}
+
+export async function updateNotecardPos(
+  memory,
+  page,
+  notecard,
+  newX,
+  newY,
+  isMobile
+) {
+  const ref = getNotecards(memory, page).where("text", "==", notecard.text);
+
+  try {
+    const querySnapshot = await ref.get();
+    querySnapshot.forEach((doc) => {
+      isMobile
+        ? doc.ref.update({
+            mobileX: newX,
+            mobileY: newY,
+          })
+        : doc.ref.update({
+            x: newX,
+            y: newY,
+          });
+    });
+  } catch (e) {
+    throw DescribeError(e);
   }
 }
 
