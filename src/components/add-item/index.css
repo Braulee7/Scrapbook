@@ -10,7 +10,7 @@ img {
   position: fixed;
   z-index: 100;
   top: 80vh;
-  left: 85vw;
+  left: 75vw;
   width: 100px;
   height: 100px;
 }
@@ -18,10 +18,11 @@ img {
 .create-item-container button {
   background-color: var(--purple);
   border-radius: 8px;
-  border: none;
+  border: solid 2px var(--grey);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .create-item-container button img {
@@ -41,4 +42,10 @@ img {
 .create-items li {
   list-style: none;
   margin: 0;
+}
+
+@media screen and (min-width: 1400px) {
+  .create-item-container {
+    left: 90vw;
+  }
 }

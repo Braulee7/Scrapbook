@@ -15,16 +15,14 @@ function ImageContainer({ memory, page }) {
         <Loading />
       ) : (
         <>
-          <div className="image-placeholder-container">
-            <div ref={ref} className="image-container">
-              {image_urls.length > 0 ? (
-                image_urls.map((image, i) => (
-                  <Image image={image} memory={memory} page={page} key={i} />
-                ))
-              ) : (
-                <p>No Images Inserted yet</p>
-              )}
-            </div>
+          <div ref={ref} className="image-container">
+            {image_urls.length > 0 ? (
+              image_urls.map((image, i) => (
+                <Image image={image} memory={memory} page={page} key={i} />
+              ))
+            ) : (
+              <p>No Images Inserted yet</p>
+            )}
           </div>
         </>
       )}
