@@ -1,7 +1,6 @@
 import { getImages } from "../../util/firebase";
 import Loading from "../loading";
 import Image from "../image";
-import AddItem from "../add-item";
 import { useRef } from "react";
 import "./index.css";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -25,7 +24,6 @@ function ImageContainer({ memory, page }) {
               ) : (
                 <p>No Images Inserted yet</p>
               )}
-              <AddItem memory={memory} page={page} />
             </div>
           </div>
         </>

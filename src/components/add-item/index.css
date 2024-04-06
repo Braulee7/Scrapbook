@@ -4,7 +4,15 @@ img {
 }
 
 .create-item-container {
-  width: 20%;
+  /* be fixed on the bottom right corner */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 100;
+  top: 80vh;
+  left: 85vw;
+  width: 100px;
+  height: 100px;
 }
 
 .create-item-container button {
