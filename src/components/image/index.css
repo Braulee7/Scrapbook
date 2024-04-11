@@ -11,6 +11,9 @@
 
 .single-image-container {
   position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 717px) {

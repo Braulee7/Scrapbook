@@ -8,6 +8,7 @@ function SliderInput({ value, children, set, min = -200, max = 200 }) {
         min={min}
         max={max}
         onChange={(e) => set(parseFloat(e.target.value))}
+        step={0.01}
       />
       <input
         type="number"

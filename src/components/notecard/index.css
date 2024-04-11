@@ -1,6 +1,7 @@
 .notecard-container {
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 158px;

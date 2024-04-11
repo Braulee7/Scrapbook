@@ -1,13 +1,11 @@
-import Draggable from "react-draggable";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { updateImagePosition } from "../../util/firebase";
-
-import "./index.css";
 import Edit from "../edit";
+import DraggableWrapper from "../draggable-wrapper";
+import "./index.css";
 
 function Image({ image, memory, page }) {
-  const { nodeRef } = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1400);
   const [rotate, setRotate] = useState(0);
   const [scale, setScale] = useState(1);
@@ -54,34 +52,29 @@ function Image({ image, memory, page }) {
 
   return (
     <>
-      <Draggable
-        nodeRef={nodeRef}
-        defaultPosition={getInitialPosition()}
-        bounds=".page-container"
-        onStop={handle_stop}
-        cancel=".img-edit-container"
-        disabled={!edit}
-        onDrag={(e, data) => e.stopPropagation()}
+      <DraggableWrapper
+        edit={edit}
+        handle_stop={handle_stop}
+        getInitialPosition={getInitialPosition}
+        containerClass={"single-image-container"}
       >
-        <motion.div ref={nodeRef} className="single-image-container">
-          <Edit
-            rotate={rotate}
-            setRotate={setRotate}
-            scale={scale}
-            setScale={setScale}
-            edit={edit}
-          >
-            <motion.img
-              animate={{ rotate, scale }}
-              draggable={false}
-              className="firebase-image"
-              onClick={() => setEdit(!edit)}
-              src={image.url}
-              alt={image.url}
-            />
-          </Edit>
-        </motion.div>
-      </Draggable>
+        <Edit
+          rotate={rotate}
+          setRotate={setRotate}
+          scale={scale}
+          setScale={setScale}
+          edit={edit}
+        >
+          <motion.img
+            animate={{ rotate, scale }}
+            draggable={false}
+            className="firebase-image"
+            onClick={() => setEdit(!edit)}
+            src={image.url}
+            alt={image.url}
+          />
+        </Edit>
+      </DraggableWrapper>
     </>
   );
 }

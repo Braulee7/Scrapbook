@@ -1,11 +1,14 @@
-import Draggable from "react-draggable";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateNotecardPos } from "../../util/firebase";
 import "./index.css";
+import DraggableWrapper from "../draggable-wrapper";
+import Edit from "../edit";
 
 function Notecard({ memory, page, notecard }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1400);
-  const nodeRef = useRef(null);
+  const [edit, setEdit] = useState(false);
+  const [rotate, setRotate] = useState(0);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,25 +45,27 @@ function Notecard({ memory, page, notecard }) {
 
   return (
     <>
-      <Draggable
-        nodeRef={nodeRef}
-        defaultPosition={getInitialPosition()}
-        bounds=".page-container"
-        onStop={handle_stop}
+      <DraggableWrapper
+        getInitialPosition={getInitialPosition}
+        handle_stop={handle_stop}
+        edit={edit}
       >
-        <div
-          ref={nodeRef}
-          className={
-            notecard.text % 2 === 0
-              ? "notecard-container purple"
-              : "notecard-container pink"
-          }
+        <Edit
+          rotate={rotate}
+          setRotate={setRotate}
+          scale={scale}
+          setScale={setScale}
+          edit={edit}
         >
-          <p data-testid="notecard-text" className="text">
+          <p
+            data-testid="notecard-text"
+            onClick={() => setEdit(!edit)}
+            className={"notecard-container pink"}
+          >
             {notecard.text}
           </p>
-        </div>
-      </Draggable>
+        </Edit>
+      </DraggableWrapper>
     </>
   );
 }
