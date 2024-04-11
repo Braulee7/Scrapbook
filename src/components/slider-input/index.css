@@ -1,0 +1,19 @@
+.slider-input {
+  accent-color: var(--green);
+}
+
+input[type="number"] {
+  border: 0;
+  border-bottom: 3px dotted var(--green);
+  margin-left: 10px;
+  background-color: none;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-bottom: 2px solid var(--green);
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

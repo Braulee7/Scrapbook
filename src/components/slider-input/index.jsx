@@ -1,8 +1,11 @@
+import "./index.css";
+
 function SliderInput({ value, children, set, min = -200, max = 200 }) {
   return (
     <label>
       <code>{children}</code>
       <input
+        className="slider-input"
         value={value}
         type="range"
         min={min}
