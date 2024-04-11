@@ -35,13 +35,13 @@ function DraggableWrapper({
     >
       <motion.div ref={ref} className={containerClass || "draggable-wrapper"}>
         <>
-          <motion.p
+          <motion.div
             variants={variants}
             animate={edit ? "open" : "closed"}
             className="drag-handle"
           >
             {edit && <p>. . .</p>}
-          </motion.p>
+          </motion.div>
         </>
         {children}
       </motion.div>
