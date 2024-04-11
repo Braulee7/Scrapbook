@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { updateNotecardPos } from "../../util/firebase";
-import "./index.css";
+import { motion } from "framer-motion";
+import useRotation from "../../hooks/useRotation";
+import useScale from "../../hooks/useScale";
 import DraggableWrapper from "../draggable-wrapper";
 import Edit from "../edit";
+import "./index.css";
 
 function Notecard({ memory, page, notecard }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1400);
   const [edit, setEdit] = useState(false);
-  const [rotate, setRotate] = useState(0);
-  const [scale, setScale] = useState(1);
+  const [rotate, setRotate] = useRotation(notecard, memory, page, false);
+  const [scale, setScale] = useScale(notecard, memory, page, false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,13 +60,14 @@ function Notecard({ memory, page, notecard }) {
           setScale={setScale}
           edit={edit}
         >
-          <p
+          <motion.p
+            animate={{ rotate, scale }}
             data-testid="notecard-text"
             onClick={() => setEdit(!edit)}
             className={"notecard-container pink"}
           >
             {notecard.text}
-          </p>
+          </motion.p>
         </Edit>
       </DraggableWrapper>
     </>

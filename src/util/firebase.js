@@ -154,9 +154,15 @@ export async function addNotecard(memory, page, text) {
     // use the text to be the doc id for faster query times
     // doesn't allow for multiple notecards with the same text
     // though
-    const id = await ref
-      .doc(text)
-      .set({ text: text, x: null, y: null, mobileX: null, mobileY: null });
+    const id = await ref.doc(text).set({
+      text: text,
+      x: null,
+      y: null,
+      mobileX: null,
+      mobileY: null,
+      scale: 1,
+      rotation: 0,
+    });
     return id;
   } catch (error) {
     throw DescribeError(error);
@@ -191,6 +197,32 @@ export async function updateNotecardPos(
   }
 }
 
+export async function updateNotecardScale(memory, page, notecard, scale) {
+  const ref = getNotecards(memory, page).where("text", "==", notecard.text);
+
+  try {
+    const querySnapshot = await ref.get();
+    querySnapshot.forEach((doc) => {
+      doc.ref.update({ scale: scale });
+    });
+  } catch (e) {
+    throw DescribeError(e);
+  }
+}
+
+export async function updateNotecardRotation(memory, page, notecard, rotation) {
+  const ref = getNotecards(memory, page).where("text", "==", notecard.text);
+
+  try {
+    const querySnapshot = await ref.get();
+    querySnapshot.forEach((doc) => {
+      doc.ref.update({ rotation: rotation });
+    });
+  } catch (e) {
+    throw DescribeError(e);
+  }
+}
+
 export function getImageUrlCollection(memory, page) {
   try {
     const ref = getPages(memory).doc(page).collection("ImageUrls");
@@ -211,6 +243,8 @@ export async function addImageUrl(memory, page, url, fileName) {
       y: null,
       mobileX: null,
       mobileY: null,
+      scale: 1,
+      rotation: 0,
     });
     return id;
   } catch (error) {
@@ -247,6 +281,44 @@ export async function updateImagePosition(
     });
   } catch (error) {
     throw DescribeError(error);
+  }
+}
+
+export async function updateImageScale(memory, page, image, scale) {
+  const ref = getImageUrlCollection(memory, page).where(
+    "fileName",
+    "==",
+    image.fileName
+  );
+
+  try {
+    const querySnapshot = await ref.get();
+    querySnapshot.forEach((doc) => {
+      doc.ref.update({
+        scale: scale,
+      });
+    });
+  } catch (e) {
+    throw DescribeError(e);
+  }
+}
+
+export async function updateImageRotation(memory, page, image, rotation) {
+  const ref = getImageUrlCollection(memory, page).where(
+    "fileName",
+    "==",
+    image.fileName
+  );
+
+  try {
+    const querySnapshot = await ref.get();
+    querySnapshot.forEach((doc) => {
+      doc.ref.update({
+        rotation: rotation,
+      });
+    });
+  } catch (e) {
+    throw DescribeError(e);
   }
 }
 

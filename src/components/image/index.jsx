@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { updateImagePosition } from "../../util/firebase";
+import useRotation from "../../hooks/useRotation";
 import Edit from "../edit";
 import DraggableWrapper from "../draggable-wrapper";
 import "./index.css";
+import useScale from "../../hooks/useScale";
 
 function Image({ image, memory, page }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1400);
-  const [rotate, setRotate] = useState(0);
-  const [scale, setScale] = useState(1);
+  const [rotate, setRotate] = useRotation(image, memory, page, true);
+  const [scale, setScale] = useScale(image, memory, page, true);
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
@@ -33,7 +35,6 @@ function Image({ image, memory, page }) {
         x = x / container_width;
       }
       await updateImagePosition(memory, page, image, x, y, isMobile);
-      console.log("updated");
     } catch (e) {
       console.log(e);
     }
