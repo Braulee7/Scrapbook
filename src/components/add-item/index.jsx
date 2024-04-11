@@ -6,6 +6,9 @@ import AddNotcard from "../add-notecard";
 import ErrorMessage from "../error-message";
 import UploadFile from "../upload-file";
 import Backdrop from "../backdrop";
+
+import note_icon from "../../assets/svg/Note_icon.svg";
+import img_icon from "../../assets/svg/Image_Icon.svg";
 import "./index.css";
 
 function AddItem({ memory, page }) {
@@ -63,7 +66,7 @@ function AddItem({ memory, page }) {
               whileTap={{ scale: 0.97 }}
               onClick={() => setAddImage(!addImage)}
             >
-              image
+              <img src={img_icon} alt="add image button" />
             </motion.button>
           </motion.li>
           <motion.li variants={itemVariants}>
@@ -71,7 +74,7 @@ function AddItem({ memory, page }) {
               whileTap={{ scale: 0.97 }}
               onClick={() => setAddNote(!addNote)}
             >
-              notecard
+              <img src={note_icon} alt="add note button" />
             </motion.button>
           </motion.li>
         </motion.ul>

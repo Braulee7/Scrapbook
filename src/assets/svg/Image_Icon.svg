@@ -1,0 +1,8 @@
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1024 1024" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" >
+<defs/>
+<g id="Layer-1" >
+<path d="M107.753 97.9191C107.668 93.4617 111.243 89.7948 115.701 89.7667L893.498 84.8688C897.955 84.8407 901.576 88.461 901.548 92.9184L896.647 879.942C896.62 884.311 893.092 887.851 888.722 887.891L130.876 894.981C126.489 895.022 122.887 891.521 122.803 887.134L115.885 524.341L107.753 97.9191Z" fill="none" opacity="1" stroke="#f5e8dd" stroke-linecap="butt" stroke-linejoin="round" stroke-width="17.1184" />
+<path d="M130.376 890.246L122.887 673.371L343.61 405.779L579.02 703.453L731.695 546.513L892.9 696.647L892.9 878.304L130.376 890.246Z" fill="#eed3d9" fill-rule="nonzero" opacity="1" stroke="#eed3d9" stroke-linecap="butt" stroke-linejoin="round" stroke-width="17.1184" />
+<path d="M675.929 295.163C675.929 260.028 705.926 231.547 742.929 231.547C779.932 231.547 809.929 260.028 809.929 295.163C809.929 330.297 779.932 358.779 742.929 358.779C705.926 358.779 675.929 330.297 675.929 295.163Z" fill="#4f646f" fill-rule="nonzero" opacity="1" stroke="#4f646f" stroke-linecap="butt" stroke-linejoin="round" stroke-width="6.21745" />
+</g>
+</svg>
