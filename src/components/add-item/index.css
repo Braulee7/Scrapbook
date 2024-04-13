@@ -44,6 +44,11 @@ img {
   margin: 0;
 }
 
+.create-items li button {
+  height: 75px;
+  width: 90px;
+}
+
 @media screen and (min-width: 1400px) {
   .create-item-container {
     left: 90vw;
